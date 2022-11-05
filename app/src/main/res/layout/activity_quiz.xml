@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--  Text Quiz Prompt Screen  -->
+    <LinearLayout
+        android:id="@+id/linlay_quiz_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible"
+        >
+
+        <TextView
+            android:id="@+id/text_quiz_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:text="Time Remaining: 4:59"
+            android:background="@color/material_dynamic_neutral95"
+            android:textSize="30sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="Text Prompt:"
+            android:textSize="30sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="20dp"
+            android:text= "Every day is a new opportunity for success! You can build on yesterday's success or put its failures behind and start over again."
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:text="Type out the text prompt to show you are awake:"
+            android:textSize="30sp"
+
+            />
+
+        <EditText
+            android:id="@+id/edittext_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:hint="Please type here..."
+            android:gravity="top"
+            />
+
+        <Button
+            android:id="@+id/btn_submit_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            />
+
+    </LinearLayout>
+
+    <!--  Text Quiz Success Screen  -->
+    <LinearLayout
+        android:id="@+id/linlay_quiz_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:text="Congratulations!\n\nYou stopped the message from being sent!"
+            android:textSize="40sp"
+            android:textColor="#93C572"
+            />
+
+        <Button
+            android:id="@+id/btn_confirm_quiz_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="ok"
+            />
+
+    </LinearLayout>
+
+    <!--  Text Quiz Failure Screen  -->
+    <LinearLayout
+        android:id="@+id/linlay_quiz_fail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:text="Oh no!\n\nYou have exceeded the time limit. The message has been sent!"
+            android:textSize="40sp"
+            android:textColor="#E32636"
+            />
+
+        <Button
+            android:id="@+id/btn_confirm_quiz_fail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="ok"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

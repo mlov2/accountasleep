@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/text_alarm_ring_display_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:text="10:55PM"
+       />
+
+    <Button
+        android:id="@+id/btn_stop_alarm"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cornerRadius="75dp"
+        android:layout_below="@id/text_alarm_ring_display_time"
+        android:layout_marginTop="20dp"
+        android:text="Stop"
+        android:insetBottom="0dp"
+        android:insetTop="0dp"
+        android:backgroundTint="#8B0000"
+        android:layout_centerHorizontal="true"
+        android:textColor="#fff"/>
+
+    <Button
+        android:id="@+id/btn_snooze_alarm"
+        android:layout_below="@id/btn_stop_alarm"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cornerRadius="75dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Snooze\n1 Remaining"
+        android:insetBottom="0dp"
+        android:insetTop="0dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#BEBEBE"
+        android:textColor="#fff" />
+
+</RelativeLayout>
