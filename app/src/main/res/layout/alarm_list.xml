@@ -14,19 +14,19 @@
             android:id="@+id/alarm_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="8:00 AM"
-            android:textSize="50dp"
-            android:textColor="@color/black"
             android:layout_marginRight="30dp"
-            android:paddingLeft="15dp"/>
+            android:paddingLeft="15dp"
+            android:text="8:00 AM"
+            android:textColor="@color/black"
+            android:textSize="50dp" />
 
         <TextView
             android:id="@+id/alarm_days"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MW"
-            android:textSize="30dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
     </LinearLayout>
 
@@ -40,18 +40,18 @@
             android:id="@+id/alarm_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
             android:text="CS 465 lecture"
-            android:textSize="30dp"
             android:textColor="@color/black"
-            android:paddingLeft="15dp"/>
+            android:textSize="30dp" />
 
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:paddingLeft="100dp"
             android:scaleX="1.5"
-            android:scaleY="1.5"
-            android:gravity="center_vertical"/>
+            android:scaleY="1.5" />
 
     </LinearLayout>
 
@@ -63,29 +63,29 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_snooze_icon"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
             android:scaleX="1.25"
             android:scaleY="1.25"
-            android:paddingTop="10dp"
-            android:paddingLeft="15dp"/>
+            android:src="@drawable/ic_snooze_icon" />
 
         <TextView
             android:id="@+id/alarm_snooze_interval"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10 min"
-            android:textSize="30dp"
-            android:textColor="@color/black"
+            android:layout_marginRight="10dp"
             android:paddingLeft="5dp"
-            android:layout_marginRight="10dp"/>
+            android:text="10 min"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/alarm_snooze_frequency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="x3"
-            android:textSize="30dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
     </LinearLayout>
 
