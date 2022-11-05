@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="20dp"
     android:orientation="vertical">
-
 <!--    Chenyang-->
 <!--    Instructions-->
     <LinearLayout
@@ -86,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:src="@drawable/ic_baseline_photo_camera_40"></ImageButton>
+                android:src="@drawable/ic_baseline_photo_camera_40" />
 
             <ImageButton
                 android:id="@+id/ImageButton02"
@@ -94,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 android:src="@drawable/ic_baseline_photo_library_40"
-                android:layout_marginLeft="10dp"></ImageButton>
+                android:layout_marginLeft="10dp" />
         </LinearLayout>
 
     </LinearLayout>

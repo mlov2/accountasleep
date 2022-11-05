@@ -2,28 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginHorizontal="20dp">
+    android:orientation="vertical">
 
     <!--    Note-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NOTE: Make sure to select contacts to send photos
-to in the 'Account' tab! Otherwise the app will not
-send photos out."
+        android:text="@string/note"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:background="#FFADF3"
         android:padding="5dp"
         android:textAlignment="center"
-        />
+    />
 
     <!--    Instructions-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="20dp">
 
         <TextView
             android:id="@+id/textView4"
@@ -62,6 +60,7 @@ send photos out."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
         <TextView
