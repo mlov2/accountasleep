@@ -20,6 +20,6 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.accountasleep.ui.notifications.NotificationsFragment"
-        android:label="@string/title_profile"
+        android:label="@string/title_account"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
