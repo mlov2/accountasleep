@@ -2,7 +2,7 @@
     <string name="app_name">Accountasleep</string>
     <string name="title_alarm">Alarm</string>
     <string name="title_photos">Photo Library</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_account">Account</string>
     <string name="upload_pictures">Upload Pictures</string>
     <string name="hint">The thought of these photos getting sent should wake you up!</string>
     <string name="examples">Examples:</string>
