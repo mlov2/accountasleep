@@ -24,8 +24,23 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+//        final TextView textView = binding.textDashboard;
+//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        //  Psuedocode:
+            // Create empty photo array of uri data type and make sure it lasts when switching tabs
+            // Add event listener for photo library button
+                // Event listener should call Photo Picker
+                    // Need to figure out how to import that component into library and where to integrate that code
+                    // Figure out if saving works
+                    // Picking photo should add to the array
+            // Grid view should take all uris in photo array and establish it
+            // Important: Make sure that emulator has photos
+
+            // Extra:
+                // Add event listener for camera button
+                // Delete = extra feature
+                // Use boolean to get rid of Note after it was displayed once
         return root;
     }
 
