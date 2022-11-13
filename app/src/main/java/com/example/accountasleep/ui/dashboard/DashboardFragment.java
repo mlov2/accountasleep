@@ -14,6 +14,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -38,6 +42,20 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+                            Intent data = result.getData();
+                            Uri uri = data.getData();
+                            imgView.setImageURI(uri);
+                        }
+                    }
+                });
+
         btn = root.findViewById(R.id.ImageButton02);
         // gridView = root.findViewById(R.id.photo_gallery);
         imgView = root.findViewById(R.id.photo_gallery);
@@ -47,7 +65,7 @@ public class DashboardFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                getActivity().startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
+                someActivityResultLauncher.launch(intent);
 
 
             }
@@ -75,18 +93,18 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1) {
-            Uri uri = data.getData();
-//            Log.d("myTag", "This is my message2");
-//            System.out.println("HERE");
-//            System.out.println(uri);
-            imgView.setImageURI(uri);
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == 1) {
+//            Uri uri = data.getData();
+////            Log.d("myTag", "This is my message2");
+////            System.out.println("HERE");
+////            System.out.println(uri);
+//            imgView.setImageURI(uri);
+//        }
+//    }
 
     @Override
     public void onDestroyView() {
