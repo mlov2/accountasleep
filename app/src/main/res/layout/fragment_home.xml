@@ -373,47 +373,26 @@
                         android:textSize="30dp"
                         android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:orientation="horizontal">
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" >
-                        <RadioButton
-                            android:id="@+id/checkBox1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="5 minutes" />
+                        <NumberPicker
+                            android:id="@+id/snooze_duration_number_picker"
+                            android:layout_width="260dp"
+                            android:layout_height="159dp"
+                            android:layout_gravity="center" />
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="6 minutes" />
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="134dp"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="mins" />
+                    </LinearLayout>
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="7 minutes" />
-
-                        <RadioButton
-                            android:id="@+id/snoozeBox4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="8 minutes" />
-
-                        <RadioButton
-                            android:id="@+id/snoozeBox5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="9 minutes" />
-
-                        <RadioButton
-                            android:id="@+id/snoozeBox6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="10 minutes" />
-                    </RadioGroup>
 
                     <TextView
                         android:id="@+id/textView3"
@@ -427,33 +406,30 @@
                         android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" >
-                        <RadioButton
-                            android:id="@+id/snoozeBox7"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="1 snooze" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="2 snoozes" />
+                        <NumberPicker
+                            android:id="@+id/snooze_limit_number_picker"
+                            android:layout_width="260dp"
+                            android:layout_height="159dp"
+                            android:layout_gravity="center" />
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox9"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="3 snoozes" />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="OK" />
-                    </RadioGroup>
-
+                        <TextView
+                            android:id="@+id/times"
+                            android:layout_width="134dp"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="times" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="OK" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

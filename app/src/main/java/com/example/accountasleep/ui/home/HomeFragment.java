@@ -1,10 +1,12 @@
 package com.example.accountasleep.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
@@ -34,6 +36,27 @@ public class HomeFragment extends Fragment {
         LinearLayout alarm_snooze = binding.snoozeSetterLayout;
         Button repeat_button = binding.repeatButton;
         Button duration_button = binding.durationButton;
+        NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
+        NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
+
+        //Initialize settings for snooze duration/limit number picker and retrieve input "snooze_duration_input"
+        snooze_duration_number_picker.setMaxValue(50);
+        snooze_duration_number_picker.setMinValue(0);
+        snooze_duration_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                int snooze_duration_input = snooze_duration_number_picker.getValue();
+            }
+        });
+        snooze_limit_number_picker.setMaxValue(20);
+        snooze_limit_number_picker.setMinValue(0);
+        snooze_limit_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                int snooze_limit_input = snooze_limit_number_picker.getValue();
+            }
+        });
+
         repeat_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
