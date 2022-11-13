@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        //Enable buttons to navigate between different pages
         repeat_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
