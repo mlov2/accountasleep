@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         LinearLayout alarm_repeat = binding.repeatSetterLayout;
         LinearLayout alarm_snooze = binding.snoozeSetterLayout;
         Button repeat_button = binding.repeatButton;
-
+        Button duration_button = binding.durationButton;
         repeat_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -42,6 +42,15 @@ public class HomeFragment extends Fragment {
                 alarm_repeat.setVisibility(View.VISIBLE);
             }
         });
+        duration_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                alarm_header.setVisibility(View.INVISIBLE);
+                alarm_setting.setVisibility(View.INVISIBLE);
+                alarm_snooze.setVisibility(View.VISIBLE);
+            }
+        });
+
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 

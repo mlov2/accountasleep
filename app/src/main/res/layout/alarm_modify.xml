@@ -213,7 +213,6 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="left|center_vertical"
                                     android:backgroundTint="@color/material_dynamic_neutral100"
-                                    android:drawableEnd="@drawable/ic_chevron_right"
                                     android:drawableTint="@color/material_dynamic_neutral40"
                                     android:text="@string/snooze_limit"
                                     android:textAllCaps="false"

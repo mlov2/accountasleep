@@ -195,6 +195,7 @@
                                     />
 
                                 <Button
+                                    android:id="@+id/duration_button"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="left|center_vertical"
@@ -227,7 +228,6 @@
                                     android:layout_height="wrap_content"
                                     android:gravity="left|center_vertical"
                                     android:backgroundTint="@color/material_dynamic_neutral100"
-                                    android:drawableEnd="@drawable/ic_chevron_right"
                                     android:drawableTint="@color/material_dynamic_neutral40"
                                     android:text="@string/snooze_limit"
                                     android:textAllCaps="false"
@@ -310,6 +310,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Sunday" />
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OK" />
             </LinearLayout>
             <!--This is the page for snooze setting
             id = snooze_setter_layout-->
@@ -407,6 +412,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="3 snoozes" />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="OK" />
                 </RadioGroup>
 
             </LinearLayout>
