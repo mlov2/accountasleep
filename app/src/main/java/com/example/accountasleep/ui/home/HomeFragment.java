@@ -36,24 +36,29 @@ public class HomeFragment extends Fragment {
         LinearLayout alarm_snooze = binding.snoozeSetterLayout;
         Button repeat_button = binding.repeatButton;
         Button duration_button = binding.durationButton;
+        Button limit_button = binding.snoozeLimitButton;
+        Button snooze_ok_button = binding.okButtonSnooze;
+        Button repeat_ok_button = binding.okButtonDay;
         NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
         NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
 
         //Initialize settings for snooze duration/limit number picker and retrieve input "snooze_duration_input"
         snooze_duration_number_picker.setMaxValue(50);
         snooze_duration_number_picker.setMinValue(0);
+        final int[] snooze_duration_input = {0};
         snooze_duration_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int snooze_duration_input = snooze_duration_number_picker.getValue();
+                snooze_duration_input[0] = snooze_duration_number_picker.getValue();
             }
         });
         snooze_limit_number_picker.setMaxValue(20);
         snooze_limit_number_picker.setMinValue(0);
+        final int[] snooze_limit_input = {0};
         snooze_limit_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                int snooze_limit_input = snooze_limit_number_picker.getValue();
+                snooze_limit_input[0] = snooze_limit_number_picker.getValue();
             }
         });
 
@@ -74,6 +79,29 @@ public class HomeFragment extends Fragment {
                 alarm_snooze.setVisibility(View.VISIBLE);
             }
         });
+        snooze_ok_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                alarm_header.setVisibility(View.VISIBLE);
+                alarm_setting.setVisibility(View.VISIBLE);
+                alarm_snooze.setVisibility(View.INVISIBLE);
+                String snooze_duration_output = snooze_duration_input[0] + " mins";
+                duration_button.setText(snooze_duration_output);
+                String snooze_limit_output = snooze_limit_input[0] + " times";
+                limit_button.setText(snooze_limit_output);
+            }
+        });
+//        repeat_ok_button.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                alarm_header.setVisibility(View.VISIBLE);
+//                alarm_setting.setVisibility(View.VISIBLE);
+//                alarm_repeat.setVisibility(View.INVISIBLE);
+//                String snooze_duration_output = snooze_duration_input[0] + " mins";
+//                duration_button.setText(snooze_duration_output);
+//            }
+//        });
+
 
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
