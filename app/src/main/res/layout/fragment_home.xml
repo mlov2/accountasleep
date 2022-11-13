@@ -21,10 +21,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Code for Alarm List page
+     To make it visible, change visibility to "visible" and
+     change visibility for the alarm settings linear layout
+     to "gone" -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/alarm_list_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- Code for Alarm Settings page -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <!--This is the layout for alarm settings header
             id = alarm_header_layout-->
@@ -32,7 +58,6 @@
             android:id="@+id/alarm_header_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible"
             android:orientation="horizontal">
 
             <Button
