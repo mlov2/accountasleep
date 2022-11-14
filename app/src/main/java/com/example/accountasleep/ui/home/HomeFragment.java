@@ -178,7 +178,11 @@ public class HomeFragment extends Fragment {
                     repeat_output += "SUN ";
                     repeat_button.setPadding(10,0,0,0);
                 }
-                repeat_button.setText(repeat_output);
+                if(repeat_output.length()==0){
+                    repeat_button.setText("NEVER");
+                }else{
+                    repeat_button.setText(repeat_output);
+                }
             }
         });
 
