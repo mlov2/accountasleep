@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment {
                 alarm_snooze.setVisibility(View.VISIBLE);
             }
         });
+        //After clicking the ok button in snooze setting page, return snooze_limit_output and snooze_duration_output
         snooze_ok_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -91,16 +92,46 @@ public class HomeFragment extends Fragment {
                 limit_button.setText(snooze_limit_output);
             }
         });
-//        repeat_ok_button.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                alarm_header.setVisibility(View.VISIBLE);
-//                alarm_setting.setVisibility(View.VISIBLE);
-//                alarm_repeat.setVisibility(View.INVISIBLE);
-//                String snooze_duration_output = snooze_duration_input[0] + " mins";
-//                duration_button.setText(snooze_duration_output);
-//            }
-//        });
+        //After clicking the ok button in repeat setting page, return repeat_output
+        repeat_ok_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                alarm_header.setVisibility(View.VISIBLE);
+                alarm_setting.setVisibility(View.VISIBLE);
+                alarm_repeat.setVisibility(View.INVISIBLE);
+
+                String repeat_output = "";
+                if(binding.Monday.isChecked()){
+                    repeat_output += "MON ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                if(binding.Tuesday.isChecked()){
+                    repeat_output += "TUE ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                if(binding.Wednesday.isChecked()){
+                    repeat_output += "WED ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                if(binding.Thursday.isChecked()){
+                    repeat_output += "THU ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                if(binding.Friday.isChecked()){
+                    repeat_output += "FRI ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                if(binding.Saturday.isChecked()){
+                    repeat_output += "SAT ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                if(binding.Sunday.isChecked()){
+                    repeat_output += "SUN ";
+                    repeat_button.setPadding(10,0,0,0);
+                }
+                repeat_button.setText(repeat_output);
+            }
+        });
 
 
 //        final TextView textView = binding.textHome;

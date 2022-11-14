@@ -308,43 +308,43 @@
                     tools:ignore="MissingConstraints">
 
                     <CheckBox
-                        android:id="@+id/checkBox2"
+                        android:id="@+id/Monday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Monday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox3"
+                        android:id="@+id/Tuesday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tuesday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox4"
+                        android:id="@+id/Wednesday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Wednesday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox5"
+                        android:id="@+id/Thursday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Thursday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox6"
+                        android:id="@+id/Friday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Friday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox7"
+                        android:id="@+id/Saturday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Saturday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox8"
+                        android:id="@+id/Sunday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Sunday" />
