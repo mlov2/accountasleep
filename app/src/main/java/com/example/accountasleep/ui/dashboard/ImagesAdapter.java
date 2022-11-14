@@ -15,7 +15,6 @@ public class ImagesAdapter extends BaseAdapter {
 
     private final Context mContext;
     private final Uri[] images;
-//    private final Integer[] images;
 
     // 1
     public ImagesAdapter(Context context, Uri[] images) {
@@ -45,7 +44,6 @@ public class ImagesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // 1
-//        final Integer image = images[position];
         final Uri image = images[position];
 
         // 2
