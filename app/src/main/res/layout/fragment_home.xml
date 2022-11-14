@@ -126,13 +126,13 @@
                     <TimePicker
                         android:id="@+id/fragment_createalarm_timePicker"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="151dp"
                         android:layout_weight="0.6"
                         android:timePickerMode="spinner" />
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="3dp"
                         android:background="@android:color/darker_gray" />
 
                     <androidx.cardview.widget.CardView
@@ -260,10 +260,11 @@
                                         android:layout_width="wrap_content"
                                         android:textSize="10sp"
                                         style="?android:attr/borderlessButtonStyle"
-                                        android:text= "Snooze Duration"
+                                        android:text= "Snooze Limits"
                                         />
 
                                     <Button
+                                        android:id="@+id/snooze_limit_button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:gravity="left|center_vertical"
@@ -272,7 +273,7 @@
                                         android:text="@string/snooze_limit"
                                         android:textAllCaps="false"
                                         android:textSize="10sp"
-                                        android:paddingLeft="180dp"
+                                        android:paddingLeft="195dp"
                                         style="?android:attr/borderlessButtonStyle"
                                         android:textColor="@color/material_dynamic_neutral40" />
                                 </LinearLayout>
@@ -308,48 +309,48 @@
                     tools:ignore="MissingConstraints">
 
                     <CheckBox
-                        android:id="@+id/checkBox2"
+                        android:id="@+id/Monday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Monday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox3"
+                        android:id="@+id/Tuesday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tuesday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox4"
+                        android:id="@+id/Wednesday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Wednesday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox5"
+                        android:id="@+id/Thursday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Thursday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox6"
+                        android:id="@+id/Friday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Friday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox7"
+                        android:id="@+id/Saturday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Saturday" />
 
                     <CheckBox
-                        android:id="@+id/checkBox8"
+                        android:id="@+id/Sunday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Sunday" />
                     <Button
-                        android:id="@+id/button3"
+                        android:id="@+id/ok_button_day"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="OK" />
@@ -374,47 +375,26 @@
                         android:textSize="30dp"
                         android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:orientation="horizontal">
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" >
-                        <RadioButton
-                            android:id="@+id/checkBox1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="5 minutes" />
+                        <NumberPicker
+                            android:id="@+id/snooze_duration_number_picker"
+                            android:layout_width="260dp"
+                            android:layout_height="159dp"
+                            android:layout_gravity="center" />
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="6 minutes" />
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="134dp"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="mins" />
+                    </LinearLayout>
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="7 minutes" />
-
-                        <RadioButton
-                            android:id="@+id/snoozeBox4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="8 minutes" />
-
-                        <RadioButton
-                            android:id="@+id/snoozeBox5"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="9 minutes" />
-
-                        <RadioButton
-                            android:id="@+id/snoozeBox6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="10 minutes" />
-                    </RadioGroup>
 
                     <TextView
                         android:id="@+id/textView3"
@@ -428,33 +408,30 @@
                         android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioGroup
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_height="wrap_content" >
-                        <RadioButton
-                            android:id="@+id/snoozeBox7"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="1 snooze" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox8"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="2 snoozes" />
+                        <NumberPicker
+                            android:id="@+id/snooze_limit_number_picker"
+                            android:layout_width="260dp"
+                            android:layout_height="159dp"
+                            android:layout_gravity="center" />
 
-                        <RadioButton
-                            android:id="@+id/snoozeBox9"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="3 snoozes" />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="OK" />
-                    </RadioGroup>
-
+                        <TextView
+                            android:id="@+id/times"
+                            android:layout_width="134dp"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:text="times" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/ok_button_snooze"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="OK" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
