@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -72,9 +75,22 @@ public class HomeFragment extends Fragment {
         Button limit_button = binding.snoozeLimitButton;
         Button snooze_ok_button = binding.okButtonSnooze;
         Button repeat_ok_button = binding.okButtonDay;
+        Switch snooze_switch = binding.snoozeSwitch;
+        CardView snooze_card = binding.snoozeCard;
         NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
         NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
+        //Show snooze setting if snooze switch is on
+        snooze_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    snooze_card.setVisibility(buttonView.VISIBLE);
+                }else{
+                    snooze_card.setVisibility(buttonView.INVISIBLE);
+                }
 
+            }
+        });
         //Initialize settings for snooze duration/limit number picker and retrieve input "snooze_duration_input"
         snooze_duration_number_picker.setMaxValue(50);
         snooze_duration_number_picker.setMinValue(0);
