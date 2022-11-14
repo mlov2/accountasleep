@@ -1,16 +1,25 @@
 package com.example.accountasleep.ui.dashboard;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.accountasleep.R;
 import com.example.accountasleep.databinding.FragmentDashboardBinding;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
@@ -34,14 +43,26 @@ public class DashboardFragment extends Fragment {
                     // Need to figure out how to import that component into library and where to integrate that code
                     // Figure out if saving works
                     // Picking photo should add to the array
-            // Grid view should take all uris in photo array and establish it
-            // Important: Make sure that emulator has photos
 
+
+
+            // Grid view should take all uris in photo array and establish it
+        GridView gridView = (GridView) root.findViewById(R.id.gridview);
+        dashboardViewModel.addImgPath(R.drawable.sample_img_1);
+        // Images Adapter
+        ImagesAdapter imagesAdapter = new ImagesAdapter(getActivity(), dashboardViewModel.imgPaths);
+        gridView.setAdapter(imagesAdapter);
+
+
+            // Important: Make sure that emulator has photos
             // Extra:
                 // Add event listener for camera button
                 // Delete = extra feature
                 // Use boolean to get rid of Note after it was displayed once
         return root;
+    }
+
+    private void setContentView(int activity_main) {
     }
 
     @Override
