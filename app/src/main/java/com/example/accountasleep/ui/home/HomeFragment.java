@@ -75,10 +75,22 @@ public class HomeFragment extends Fragment {
         Button limit_button = binding.snoozeLimitButton;
         Button snooze_ok_button = binding.okButtonSnooze;
         Button repeat_ok_button = binding.okButtonDay;
+        Button delete_button = binding.deleteButton;
         Switch snooze_switch = binding.snoozeSwitch;
         CardView snooze_card = binding.snoozeCard;
         NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
         NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
+
+
+        //Delete alarm TODO: Delete memory and go back to alarm page
+        delete_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                alarm_header.setVisibility(View.INVISIBLE);
+                alarm_setting.setVisibility(View.INVISIBLE);
+            }
+        });
+
         //Show snooze setting if snooze switch is on
         snooze_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
