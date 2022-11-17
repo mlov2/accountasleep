@@ -34,7 +34,7 @@ public class MyListAdapter extends ArrayAdapter<String> {
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.alarm_list, null, true);
+        View rowView = inflater.inflate(R.layout.alarm_list_item, null, true);
 
         TextView alarmTimeText = (TextView) rowView.findViewById(R.id.alarm_time);
         TextView alarmDaysText = (TextView) rowView.findViewById(R.id.alarm_days);

@@ -23,6 +23,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.accountasleep.R;
 import com.example.accountasleep.databinding.FragmentHomeBinding;
 
+import java.util.ArrayList;
+
 public class HomeFragment extends Fragment {
     // Array of strings...
     String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
@@ -42,9 +44,20 @@ public class HomeFragment extends Fragment {
         // - to get listview to work: https://www.youtube.com/watch?v=7MRnL_slGrI
         // - to create a custom adapter: TODO (refer to one of the links below)
         ListView lv = (ListView) root.findViewById(R.id.alarm_list_view);
-        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
+
+        ArrayList<Alarm> alarmlist = new ArrayList<>();
+        alarmlist.add(new Alarm("8:00", "MW", "CS 465 lecture", 10, 3));
+
+        System.out.print(alarmlist.size());
+
+//        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
 //        CustomAdapter adapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);
+        AlarmAdapter adapter = new AlarmAdapter(this.getActivity(), alarmlist);
         lv.setAdapter(adapter);
+
+        // references for adapter:
+        // - https://www.geeksforgeeks.org/custom-arrayadapter-with-listview-in-android/
+        // - https://medium.com/mindorks/custom-array-adapters-made-easy-b6c4930560dd
 
 
 
