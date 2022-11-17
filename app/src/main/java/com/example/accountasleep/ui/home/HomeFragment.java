@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
             "WebOS","Ubuntu","Windows7","Max OS X"};
 
     private FragmentHomeBinding binding;
+    private String alarm_setting_header_value = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -85,37 +86,44 @@ public class HomeFragment extends Fragment {
         Button add_alarm_button = binding.addAlarmButton;
         Button edit_alarm_button = binding.editAlarmButton;
         LinearLayout alarm_list = binding.alarmListLayout;
-        LinearLayout alarm_setting_page = binding.alarmSettingPage;
+
         // alarm setting page variables
+        LinearLayout alarm_setting_page = binding.alarmSettingPage;
         LinearLayout alarm_header = binding.alarmHeaderLayout;
-        LinearLayout alarm_setting = binding.alarmSettingLayout;
-        LinearLayout alarm_repeat = binding.repeatSetterLayout;
-        LinearLayout alarm_snooze = binding.snoozeSetterLayout;
         Button cancel_button = binding.cancelButton;
+        TextView alarm_setting_header_label = binding.alarmSettingHeaderLabel;
         Button done_button = binding.doneButton;
+        LinearLayout alarm_setting = binding.alarmSettingLayout;
         Button repeat_button = binding.repeatButton;
-        Button duration_button = binding.durationButton;
-        Button limit_button = binding.snoozeLimitButton;
-        Button snooze_ok_button = binding.okButtonSnooze;
-        Button repeat_ok_button = binding.okButtonDay;
-        Button delete_button = binding.deleteButton;
         Switch snooze_switch = binding.snoozeSwitch;
         CardView snooze_card = binding.snoozeCard;
+        Button duration_button = binding.durationButton;
+        Button limit_button = binding.snoozeLimitButton;
+        Button delete_button = binding.deleteButton;
+        LinearLayout alarm_repeat = binding.repeatSetterLayout;
+        Button repeat_ok_button = binding.okButtonDay;
+        LinearLayout alarm_snooze = binding.snoozeSetterLayout;
         NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
         NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
+        Button snooze_ok_button = binding.okButtonSnooze;
 
         //Edit alarm
         edit_alarm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alarm_setting_page.setVisibility(View.VISIBLE);
+                // hide alarm list page
                 alarm_page_header.setVisibility(View.GONE);
                 alarm_list.setVisibility(View.GONE);
 
-                // TODO: add in extra functionality
-                // - change header name in alarm setting
-                // - set fields in the alarm setting page to the
-                // current settings of the alarm we are editing
+                // show alarm setting page
+                alarm_setting_page.setVisibility(View.VISIBLE);
+
+                // ensure alarm setting page header is set correctly
+                alarm_setting_header_value = "Edit Alarm";
+                alarm_setting_header_label.setText(alarm_setting_header_value);
+
+                // TODO: set fields in the alarm setting page to the
+                //  current settings of the alarm we are editing
             }
         });
 
@@ -123,11 +131,16 @@ public class HomeFragment extends Fragment {
         add_alarm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alarm_setting_page.setVisibility(View.VISIBLE);
+                // hide alarm list page
                 alarm_page_header.setVisibility(View.GONE);
                 alarm_list.setVisibility(View.GONE);
 
-                // TODO: add the new alarm and its settings to the alarm list view
+                // show alarm setting page
+                alarm_setting_page.setVisibility(View.VISIBLE);
+
+                // ensure alarm setting page header is set correctly
+                alarm_setting_header_value = "Add Alarm";
+                alarm_setting_header_label.setText(alarm_setting_header_value);
             }
         });
 
@@ -135,7 +148,10 @@ public class HomeFragment extends Fragment {
         cancel_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                // hide alarm setting page
                 alarm_setting_page.setVisibility(View.GONE);
+
+                // show alarm list page
                 alarm_page_header.setVisibility(View.VISIBLE);
                 alarm_list.setVisibility(View.VISIBLE);
             }
@@ -145,9 +161,22 @@ public class HomeFragment extends Fragment {
         done_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                // hide alarm setting page
                 alarm_setting_page.setVisibility(View.GONE);
+
+                // show alarm list page
                 alarm_page_header.setVisibility(View.VISIBLE);
                 alarm_list.setVisibility(View.VISIBLE);
+
+                // TODO: add the new alarm and its settings to the alarm list view
+                // - alarm label
+                // - alarm time
+                // - alarm time of day
+                // - repeat
+                // - send a message (boolean)
+                // - snooze (boolean)
+                // - snooze duration
+                // - snooze limit
             }
         });
 
@@ -164,27 +193,27 @@ public class HomeFragment extends Fragment {
         snooze_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     snooze_card.setVisibility(buttonView.VISIBLE);
-                }else{
+                } else {
                     snooze_card.setVisibility(buttonView.INVISIBLE);
                 }
-
             }
         });
+
         //Initialize settings for snooze duration/limit number picker and retrieve input "snooze_duration_input"
-        snooze_duration_number_picker.setMaxValue(50);
-        snooze_duration_number_picker.setMinValue(0);
-        final int[] snooze_duration_input = {0};
+        snooze_duration_number_picker.setMaxValue(10);
+        snooze_duration_number_picker.setMinValue(5);
+        final int[] snooze_duration_input = {5};
         snooze_duration_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 snooze_duration_input[0] = snooze_duration_number_picker.getValue();
             }
         });
-        snooze_limit_number_picker.setMaxValue(20);
-        snooze_limit_number_picker.setMinValue(0);
-        final int[] snooze_limit_input = {0};
+        snooze_limit_number_picker.setMaxValue(3);
+        snooze_limit_number_picker.setMinValue(1);
+        final int[] snooze_limit_input = {1};
         snooze_limit_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
@@ -196,40 +225,35 @@ public class HomeFragment extends Fragment {
         repeat_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                alarm_header.setVisibility(View.INVISIBLE);
-                alarm_setting.setVisibility(View.INVISIBLE);
+                // hide alarm setting page
+                alarm_setting.setVisibility(View.GONE);
+
+                // change alarm setting header
+                cancel_button.setVisibility(View.GONE);
+                done_button.setVisibility(View.GONE);
+                alarm_setting_header_label.setText("Repeat");
+
+                // show alarm repeat setting page
                 alarm_repeat.setVisibility(View.VISIBLE);
             }
         });
-        duration_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                alarm_header.setVisibility(View.INVISIBLE);
-                alarm_setting.setVisibility(View.INVISIBLE);
-                alarm_snooze.setVisibility(View.VISIBLE);
-            }
-        });
-        //After clicking the ok button in snooze setting page, return snooze_limit_output and snooze_duration_output
-        snooze_ok_button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                alarm_header.setVisibility(View.VISIBLE);
-                alarm_setting.setVisibility(View.VISIBLE);
-                alarm_snooze.setVisibility(View.INVISIBLE);
-                String snooze_duration_output = snooze_duration_input[0] + " mins";
-                duration_button.setText(snooze_duration_output);
-                String snooze_limit_output = snooze_limit_input[0] + " times";
-                limit_button.setText(snooze_limit_output);
-            }
-        });
+
         //After clicking the ok button in repeat setting page, return repeat_output
         repeat_ok_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                alarm_header.setVisibility(View.VISIBLE);
-                alarm_setting.setVisibility(View.VISIBLE);
-                alarm_repeat.setVisibility(View.INVISIBLE);
+                // hide alarm repeat setting page
+                alarm_repeat.setVisibility(View.GONE);
 
+                // change alarm setting header
+                cancel_button.setVisibility(View.VISIBLE);
+                done_button.setVisibility(View.VISIBLE);
+                alarm_setting_header_label.setText(alarm_setting_header_value);
+
+                // show alarm setting page
+                alarm_setting.setVisibility(View.VISIBLE);
+
+                // display in alarm setting page
                 String repeat_output = "";
                 if(binding.Monday.isChecked()){
                     repeat_output += "MON ";
@@ -259,6 +283,7 @@ public class HomeFragment extends Fragment {
                     repeat_output += "SUN ";
                     repeat_button.setPadding(10,0,0,0);
                 }
+
                 if(repeat_output.length()==0){
                     repeat_button.setText("NEVER");
                 }else{
@@ -267,6 +292,44 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        duration_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // hide alarm setting page
+                alarm_setting.setVisibility(View.GONE);
+
+                // change alarm setting header
+                cancel_button.setVisibility(View.GONE);
+                done_button.setVisibility(View.GONE);
+                alarm_setting_header_label.setText("Snooze");
+
+                // show alarm snooze setting page
+                alarm_snooze.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //After clicking the ok button in snooze setting page, return snooze_limit_output and snooze_duration_output
+        snooze_ok_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // hide alarm snooze setting page
+                alarm_snooze.setVisibility(View.GONE);
+
+                // change alarm setting header
+                cancel_button.setVisibility(View.VISIBLE);
+                done_button.setVisibility(View.VISIBLE);
+                alarm_setting_header_label.setText(alarm_setting_header_value);
+
+                // show alarm setting page
+                alarm_setting.setVisibility(View.VISIBLE);
+
+                // display in alarm setting page
+                String snooze_duration_output = snooze_duration_input[0] + " mins";
+                duration_button.setText(snooze_duration_output);
+                String snooze_limit_output = snooze_limit_input[0] + " times";
+                limit_button.setText(snooze_limit_output);
+            }
+        });
 
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);

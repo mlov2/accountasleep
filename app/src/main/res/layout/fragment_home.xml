@@ -115,6 +115,7 @@
                 android:text="Cancel" />
 
             <TextView
+                android:id="@+id/alarm_setting_header_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/title_add_alarm"
@@ -233,7 +234,8 @@
                             android:gravity="left"
                             android:text="   SEND A MESSAGE"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:checked="true"/>
 
                     </LinearLayout>
 
@@ -428,7 +430,7 @@
                             android:id="@+id/snooze_duration_number_picker"
                             android:layout_width="260dp"
                             android:layout_height="159dp"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center_horizontal" />
 
                         <TextView
                             android:id="@+id/textView"
@@ -461,7 +463,7 @@
                             android:id="@+id/snooze_limit_number_picker"
                             android:layout_width="260dp"
                             android:layout_height="159dp"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center_horizontal" />
 
                         <TextView
                             android:id="@+id/times"
