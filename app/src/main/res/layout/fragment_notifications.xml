@@ -6,21 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/text_notifications"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <Button
+        android:id="@+id/btn_start_quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,10 +29,12 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="Quiz Screen"
         android:layout_marginBottom="70dp"
+        android:visibility="visible"
         />
 
         <!--  Default Account Page  -->
         <LinearLayout
+            android:id="@+id/linlay_account_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -78,6 +81,7 @@
                 android:layout_marginHorizontal="10dp"
                 >
                 <Button
+                    android:id="@+id/btn_select_manage_contacts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
@@ -117,8 +121,10 @@
 
         <!--  Manage Contacts Page  -->
         <RelativeLayout
+            android:id="@+id/rellay_manage_contacts_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="60dp"
             android:orientation="vertical"
             android:visibility="gone"
             >
@@ -134,14 +140,84 @@
                 android:background="@color/material_dynamic_neutral95"
                 />
 
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/text_manage_contacts_header"-->
+<!--                android:paddingHorizontal="20dp"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:textSize="24sp"-->
+<!--                android:text="No contacts selected.\n\nAdd individual contacts to select message recipients from when setting alarms."-->
+<!--                android:textAlignment="center"-->
+<!--                />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/text_contact_instructions"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/text_manage_contacts_header"-->
+<!--                android:paddingHorizontal="20dp"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:textSize="24sp"-->
+<!--                android:text="Add individual contacts to select message recipients from when setting alarms."-->
+<!--                android:textAlignment="center"-->
+<!--                />-->
+
             <TextView
+                android:id="@+id/text_contact_instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_manage_contacts_header"
                 android:paddingHorizontal="20dp"
                 android:paddingTop="10dp"
                 android:textSize="24sp"
-                android:text="No contacts selected.\n\nAdd individual contacts to select message recipients from when setting alarms."
+                android:text="Add phone numbers of friends or family to send messages to."
+                android:textAlignment="center"
+                />
+
+            <EditText
+                android:id="@+id/edittext_phone_number"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_contact_instructions"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="20dp"
+                android:hint="Insert phone number here"
+                />
+
+<!--            <Button-->
+<!--                android:layout_width="20dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:insetBottom="0dp"-->
+<!--                android:insetTop="0dp"-->
+<!--                android:layout_marginBottom="60dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_toRightOf="@id/edittext_phone_number"-->
+<!--                android:layout_alignBaseline="@id/edittext_phone_number"-->
+<!--                android:drawableTint="#FFFFFF"-->
+<!--                android:drawableLeft="@drawable/ic_add"-->
+<!--                />-->
+
+            <ImageButton
+                android:id="@+id/imgbtn_add_phone_number"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_add"
+                android:layout_marginBottom="60dp"
+                android:layout_marginStart="20dp"
+                android:layout_toRightOf="@id/edittext_phone_number"
+                android:layout_alignTop="@id/edittext_phone_number"
+                />
+
+            <TextView
+                android:id="@+id/text_contact_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edittext_phone_number"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="10dp"
+                android:textSize="24sp"
+                android:text=""
                 android:textAlignment="center"
                 />
 
@@ -199,18 +275,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                app:cornerRadius="40dp"
-                android:insetBottom="0dp"
-                android:insetTop="0dp"
-                android:layout_marginBottom="60dp"
-                android:layout_marginStart="20dp"
-                android:layout_alignParentBottom="true"
-                android:drawableTint="#FFFFFF"
-                android:drawableLeft="@drawable/ic_add_individual"
-                />
+<!--            <Button-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                app:cornerRadius="40dp"-->
+<!--                android:insetBottom="0dp"-->
+<!--                android:insetTop="0dp"-->
+<!--                android:layout_marginBottom="60dp"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:drawableTint="#FFFFFF"-->
+<!--                android:drawableLeft="@drawable/ic_add_individual"-->
+<!--                />-->
 
 
         </RelativeLayout>

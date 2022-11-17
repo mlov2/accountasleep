@@ -7,42 +7,193 @@
     android:orientation="vertical"
     android:gravity="center_vertical">
 
-    <TextView
-        android:id="@+id/text_alarm_ring_display_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="50sp"
-        android:text="10:55PM"
-       />
+    <RelativeLayout
+        android:id="@+id/rellay_ring_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
 
-    <Button
-        android:id="@+id/btn_stop_alarm"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:cornerRadius="75dp"
-        android:layout_below="@id/text_alarm_ring_display_time"
-        android:layout_marginTop="20dp"
-        android:text="Stop"
-        android:insetBottom="0dp"
-        android:insetTop="0dp"
-        android:backgroundTint="#8B0000"
-        android:layout_centerHorizontal="true"
-        android:textColor="#fff"/>
+<!--        <TextView-->
+<!--            android:id="@+id/text_alarm_ring_display_time"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:textSize="50sp"-->
+<!--            android:text="10:55PM"-->
+<!--            />-->
 
-    <Button
-        android:id="@+id/btn_snooze_alarm"
-        android:layout_below="@id/btn_stop_alarm"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:cornerRadius="75dp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Snooze\n1 Remaining"
-        android:insetBottom="0dp"
-        android:insetTop="0dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#BEBEBE"
-        android:textColor="#fff" />
+        <TextClock
+            android:id="@+id/text_alarm_ring_display_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="50sp"
+            android:textColor="@color/material_dynamic_neutral40"
+            />
+
+        <!--  NOTE: This button shows up as purple in the preview but renders as red (#8B0000) in the app  -->
+        <Button
+            android:id="@+id/btn_stop_alarm"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/text_alarm_ring_display_time"
+            android:layout_marginTop="20dp"
+            android:text="Stop"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#8B0000"
+            android:layout_centerHorizontal="true"
+            android:textColor="#fff"/>
+
+        <!--  NOTE: This button shows up as purple in the preview but renders as gray (#BEBEBE) in the app  -->
+        <Button
+            android:id="@+id/btn_snooze_alarm"
+            android:layout_below="@id/btn_stop_alarm"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/rounded_button"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Snooze\n1 Remaining"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#BEBEBE"
+            android:textColor="#fff" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linlay_quiz_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!--  Text Quiz Prompt Screen  -->
+        <LinearLayout
+            android:id="@+id/linlay_quiz_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            >
+
+            <TextView
+                android:id="@+id/text_quiz_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:textAlignment="center"
+                android:text="Time Remaining: 4:59"
+                android:background="@color/material_dynamic_neutral95"
+                android:textSize="30sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:text="Text Prompt:"
+                android:textSize="30sp"
+                />
+
+            <TextView
+                android:id="@+id/text_quiz_passage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="20dp"
+                android:text= "Every day is a new opportunity for success! You can build on yesterday's success or put its failures behind and start over again."
+                android:textSize="20sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="20dp"
+                android:text="Type out the text prompt to show you are awake:"
+                android:textSize="30sp"
+
+                />
+
+            <EditText
+                android:id="@+id/edittext_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="20dp"
+                android:hint="Please type here..."
+                android:gravity="top"
+                />
+
+            <Button
+                android:id="@+id/btn_submit_quiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                />
+
+        </LinearLayout>
+
+        <!--  Text Quiz Success Screen  -->
+        <LinearLayout
+            android:id="@+id/linlay_quiz_success"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:text="Congratulations!\n\nYou stopped the message from being sent!"
+                android:textSize="40sp"
+                android:textColor="#93C572"
+                />
+
+            <Button
+                android:id="@+id/btn_confirm_quiz_success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="ok"
+                />
+
+        </LinearLayout>
+
+        <!--  Text Quiz Failure Screen  -->
+        <LinearLayout
+            android:id="@+id/linlay_quiz_fail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="20dp"
+                android:text="Oh no!\n\nYou have exceeded the time limit. The message has been sent!"
+                android:textSize="40sp"
+                android:textColor="#E32636"
+                />
+
+            <Button
+                android:id="@+id/btn_confirm_quiz_fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="ok"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
