@@ -79,7 +79,7 @@ public class NotificationsFragment extends Fragment {
                     contactText.setText(enteredText.getText().toString());
                     enteredText.setText("");
                 } else {
-                    Toast.makeText(getActivity().getBaseContext(), "Invalid phone number cannot be added: " + phoneNumber, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getBaseContext(), "Invalid phone number cannot be added.", Toast.LENGTH_SHORT).show();
                 }
                 enteredText.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
             }
