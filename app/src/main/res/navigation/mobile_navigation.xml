@@ -9,7 +9,7 @@
         android:id="@+id/navigation_alarm"
         android:name="com.example.accountasleep.ui.home.HomeFragment"
         android:label="@string/title_alarm"
-        tools:layout="@layout/alarm_page" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_photos"

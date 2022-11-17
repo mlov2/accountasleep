@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Accountasleep</string>
     <string name="title_alarm">Alarm</string>
+    <string name="title_edit_alarm">Edit Alarm</string>
+    <string name="title_add_alarm">Add Alarm</string>
     <string name="title_photos">Photo Library</string>
     <string name="title_account">Account</string>
     <string name="upload_pictures">Upload Pictures</string>
@@ -8,5 +10,9 @@
     <string name="examples">Examples:</string>
     <string name="queued_photos">Queued Photos</string>
     <string name="queue_hint">(One randomly selected image will be sent out)</string>
+    <string name="repeat">Never</string>
+    <string name="snooze_duration">10 mins</string>
+    <string name="snooze_limit">3 times</string>
+    <string name="alarm_label">Alarm</string>
     <string name="note">NOTE: Make sure to select contacts to send photos to in the \'Account\' tab! Otherwise the app will not send photos out.</string>
 </resources>

@@ -14,10 +14,10 @@ import com.example.accountasleep.R;
 public class ImagesAdapter extends BaseAdapter {
 
     private final Context mContext;
-    private final Integer[] images;
+    private final Uri[] images;
 
     // 1
-    public ImagesAdapter(Context context, Integer[] images) {
+    public ImagesAdapter(Context context, Uri[] images) {
         this.mContext = context;
         this.images = images;
     }
@@ -44,7 +44,7 @@ public class ImagesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // 1
-        final Integer image = images[position];
+        final Uri image = images[position];
 
         // 2
         if (convertView == null) {
@@ -53,7 +53,8 @@ public class ImagesAdapter extends BaseAdapter {
         }
 
         // 3
-        Uri path = Uri.parse("android.resource://com.example.accountasleep/" + images[position]);
+        // Uri path = Uri.parse("android.resource://com.example.accountasleep/" + images[position]);
+        Uri path = images[position];
         final ImageView imageView = (ImageView)convertView.findViewById(R.id.imageview_cover_art);
         imageView.setImageURI(path);
 //        final TextView nameTextView = (TextView)convertView.findViewById(R.id.textview_book_name);
