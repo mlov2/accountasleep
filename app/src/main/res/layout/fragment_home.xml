@@ -77,7 +77,8 @@
             android:id="@+id/alarm_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="60dp">
 
             <ListView
                 android:id="@+id/alarm_list_view"
@@ -226,7 +227,7 @@
                         android:orientation="horizontal">
 
                         <Switch
-                            android:id="@+id/switch1"
+                            android:id="@+id/send_message_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_marginTop="20dp"

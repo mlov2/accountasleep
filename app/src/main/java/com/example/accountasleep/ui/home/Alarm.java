@@ -7,14 +7,16 @@ public class Alarm {
     private String alarmLabel;
     private int alarmSnoozeInterval;
     private int alarmSnoozeFrequency;
+    private boolean alarmEnabled;
 
-    public Alarm(String alarmTime, String alarmAmPm, String alarmDays, String alarmLabel, int alarmSnoozeInterval, int alarmSnoozeFrequency) {
+    public Alarm(String alarmTime, String alarmAmPm, String alarmDays, String alarmLabel, int alarmSnoozeInterval, int alarmSnoozeFrequency, boolean alarmEnabled) {
         this.alarmTime = alarmTime;
         this.alarmAmPm = alarmAmPm;
         this.alarmDays = alarmDays;
         this.alarmLabel = alarmLabel;
         this.alarmSnoozeInterval = alarmSnoozeInterval;
         this.alarmSnoozeFrequency = alarmSnoozeFrequency;
+        this.alarmEnabled = alarmEnabled;
     }
 
     public void setAlarmTime(String alarmTime) {
@@ -41,6 +43,10 @@ public class Alarm {
         this.alarmSnoozeFrequency = alarmSnoozeFrequency;
     }
 
+    public void setAlarmEnabled(boolean alarmEnabled) {
+        this.alarmEnabled = alarmEnabled;
+    }
+
     public String getAlarmTime() {
         return alarmTime;
     }
@@ -64,4 +70,6 @@ public class Alarm {
     public int getAlarmSnoozeFrequency() {
         return alarmSnoozeFrequency;
     }
+
+    public boolean getAlarmEnabled() { return alarmEnabled; }
 }

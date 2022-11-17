@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -40,6 +41,9 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
         TextView time = (TextView) listItem.findViewById(R.id.alarm_time);
         time.setText(currentAlarm.getAlarmTime());
 
+        TextView time_of_day = (TextView) listItem.findViewById(R.id.alarm_am_pm);
+        time_of_day.setText(currentAlarm.getAlarmAmPm());
+
         TextView days = (TextView) listItem.findViewById(R.id.alarm_days);
         days.setText(currentAlarm.getAlarmDays());
 
@@ -55,6 +59,11 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
 
             TextView snooze_frequency = (TextView) listItem.findViewById(R.id.alarm_snooze_frequency);
             snooze_frequency.setText(Integer.toString(currentAlarm.getAlarmSnoozeFrequency()));
+        }
+
+        if (currentAlarm.getAlarmEnabled()) {
+            Switch alarm_enable = (Switch) listItem.findViewById(R.id.alarm_enable);
+            alarm_enable.setChecked(true);
         }
 
         return listItem;

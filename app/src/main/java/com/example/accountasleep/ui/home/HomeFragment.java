@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.accountasleep.R;
 import com.example.accountasleep.databinding.FragmentHomeBinding;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -31,7 +33,24 @@ public class HomeFragment extends Fragment {
             "WebOS","Ubuntu","Windows7","Max OS X"};
 
     private FragmentHomeBinding binding;
+
+    private AlarmAdapter adapter;
+    private ArrayList<Alarm> alarmlist;
+    private ListView lv;
+
     private String alarm_setting_header_value = "";
+    private int snooze_duration_input = 5;
+    private int snooze_limit_input = 1;
+
+    ArrayList<ArrayList<Object>> alarms_raw = new ArrayList<>();
+    private String save_alarm_label = "";
+    private String save_alarm_time = "";
+    private String save_alarm_time_of_day = "AM";
+    private Boolean[] save_repeat = {false, false, false, false, false, false, false};
+    private boolean save_send_a_message = true;
+    private boolean save_snooze = false;
+    private int save_snooze_duration = -1;
+    private int save_snooze_limit = -1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,17 +63,16 @@ public class HomeFragment extends Fragment {
         // references:
         // - to get listview to work: https://www.youtube.com/watch?v=7MRnL_slGrI
         // - to create a custom adapter: https://www.geeksforgeeks.org/custom-arrayadapter-with-listview-in-android/
-        ListView lv = (ListView) root.findViewById(R.id.alarm_list_view);
+        lv = (ListView) root.findViewById(R.id.alarm_list_view);
 
-        ArrayList<Alarm> alarmlist = new ArrayList<>();
-        // TODO: to make dynamic, do a for loop and populate each parameter with the elements from the respective arrays
-        alarmlist.add(new Alarm("8:00", "AM", "Mon Wed", "CS 465 lecture", 10, 3));
-        alarmlist.add(new Alarm("9:00", "AM", "Tues Thu", "CS 421 HW", 8, 5));
-        alarmlist.add(new Alarm("12:00", "AM", "M T W T F S S", "Go to bed", -1, -1));
+        alarmlist = new ArrayList<>();
+        alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", 10, 3, true));
+        alarmlist.add(new Alarm("9:00", "AM", "TTh", "CS 421 HW", 8, 5, false));
+        alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", -1, -1, true));
 
 //        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
 //        CustomAdapter adapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);
-        AlarmAdapter adapter = new AlarmAdapter(this.getActivity(), alarmlist);
+        adapter = new AlarmAdapter(this.getActivity(), alarmlist);
         lv.setAdapter(adapter);
 
         // references for adapter:
@@ -94,7 +112,10 @@ public class HomeFragment extends Fragment {
         TextView alarm_setting_header_label = binding.alarmSettingHeaderLabel;
         Button done_button = binding.doneButton;
         LinearLayout alarm_setting = binding.alarmSettingLayout;
+        EditText alarm_label = binding.alarmLabel;
+        TimePicker alarm_time = binding.fragmentCreatealarmTimePicker;
         Button repeat_button = binding.repeatButton;
+        Switch send_msg_switch = binding.sendMessageSwitch;
         Switch snooze_switch = binding.snoozeSwitch;
         CardView snooze_card = binding.snoozeCard;
         Button duration_button = binding.durationButton;
@@ -168,15 +189,84 @@ public class HomeFragment extends Fragment {
                 alarm_page_header.setVisibility(View.VISIBLE);
                 alarm_list.setVisibility(View.VISIBLE);
 
-                // TODO: add the new alarm and its settings to the alarm list view
-                // - alarm label
-                // - alarm time
-                // - alarm time of day
-                // - repeat
-                // - send a message (boolean)
-                // - snooze (boolean)
-                // - snooze duration
-                // - snooze limit
+                // save the new alarm and its settings to the alarm list view
+                save_alarm_label = alarm_label.getText().toString();
+                // alarm time
+                int hour = alarm_time.getCurrentHour();
+                if (hour > 12) {
+                    hour = hour - 12;
+                    save_alarm_time_of_day = "PM";
+                }
+                int minute = alarm_time.getCurrentMinute();
+                save_alarm_time = "";
+                save_alarm_time += Integer.toString(hour);
+                save_alarm_time += ":";
+                if (minute < 10) {
+                    save_alarm_time += "0" + Integer.toString(minute);
+                } else {
+                    save_alarm_time += Integer.toString(minute);
+                }
+                // repeat
+                save_repeat[0] = binding.Sunday.isChecked();
+                save_repeat[1] = binding.Monday.isChecked();
+                save_repeat[2] = binding.Tuesday.isChecked();
+                save_repeat[3] = binding.Wednesday.isChecked();
+                save_repeat[4] = binding.Thursday.isChecked();
+                save_repeat[5] = binding.Friday.isChecked();
+                save_repeat[6] = binding.Saturday.isChecked();
+                // custom
+                save_send_a_message = send_msg_switch.isChecked();
+                save_snooze = snooze_switch.isChecked();
+                if (save_snooze) {
+                    save_snooze_duration = snooze_duration_input;
+                    save_snooze_limit = snooze_limit_input;
+                }
+
+                // save alarm settings
+                ArrayList<Object> alarm_raw = new ArrayList<>();
+                alarm_raw.add(save_alarm_label);
+                alarm_raw.add(save_alarm_time);
+                alarm_raw.add(save_alarm_time_of_day);
+                alarm_raw.add(save_repeat);
+                alarm_raw.add(save_send_a_message);
+                alarm_raw.add(save_snooze);
+                alarm_raw.add(save_snooze_duration);
+                alarm_raw.add(save_snooze_limit);
+                alarms_raw.add(alarm_raw);
+
+                // update alarm list page
+                ArrayList<Object> current_alarm = alarm_raw;
+                String alarm_label = (String) current_alarm.get(0);
+                String alarm_time = (String) current_alarm.get(1);
+                String alarm_time_of_day = (String) current_alarm.get(2);
+                Boolean[] alarm_repeat = (Boolean[]) current_alarm.get(3);
+                String alarm_repeat_str = "";
+                if (alarm_repeat[0] && alarm_repeat[1] && alarm_repeat[2] && alarm_repeat[3]
+                        && alarm_repeat[4] && alarm_repeat[5] && alarm_repeat[6]) {
+                    alarm_repeat_str = "Every day";
+                } else if (alarm_repeat[1] && alarm_repeat[2] && alarm_repeat[3] && alarm_repeat[4] && alarm_repeat[5]) {
+                    alarm_repeat_str = "Every weekday";
+                } else if (alarm_repeat[0] && alarm_repeat[6]) {
+                    alarm_repeat_str = "Every weekend";
+                } else {
+                    if (alarm_repeat[0]) alarm_repeat_str += "S";
+                    if (alarm_repeat[1]) alarm_repeat_str += "M";
+                    if (alarm_repeat[2]) alarm_repeat_str += "T";
+                    if (alarm_repeat[3]) alarm_repeat_str += "W";
+                    if (alarm_repeat[4]) alarm_repeat_str += "Th";
+                    if (alarm_repeat[5]) alarm_repeat_str += "F";
+                    if (alarm_repeat[6]) alarm_repeat_str += "S";
+                }
+                int snooze_duration = (int) current_alarm.get(6);
+                int snooze_limit = (int) current_alarm.get(7);
+
+                alarmlist.add(new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, snooze_duration, snooze_limit, true));
+
+                // reference to refresh list view: https://stackoverflow.com/questions/37460133/how-to-refresh-listview-in-a-custom-adapter
+                lv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                lv.invalidateViews();
+                lv.refreshDrawableState();
             }
         });
 
@@ -204,20 +294,18 @@ public class HomeFragment extends Fragment {
         //Initialize settings for snooze duration/limit number picker and retrieve input "snooze_duration_input"
         snooze_duration_number_picker.setMaxValue(10);
         snooze_duration_number_picker.setMinValue(5);
-        final int[] snooze_duration_input = {5};
         snooze_duration_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                snooze_duration_input[0] = snooze_duration_number_picker.getValue();
+                snooze_duration_input = snooze_duration_number_picker.getValue();
             }
         });
         snooze_limit_number_picker.setMaxValue(3);
         snooze_limit_number_picker.setMinValue(1);
-        final int[] snooze_limit_input = {1};
         snooze_limit_number_picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                snooze_limit_input[0] = snooze_limit_number_picker.getValue();
+                snooze_limit_input = snooze_limit_number_picker.getValue();
             }
         });
 
@@ -324,9 +412,9 @@ public class HomeFragment extends Fragment {
                 alarm_setting.setVisibility(View.VISIBLE);
 
                 // display in alarm setting page
-                String snooze_duration_output = snooze_duration_input[0] + " mins";
+                String snooze_duration_output = snooze_duration_input + " mins";
                 duration_button.setText(snooze_duration_output);
-                String snooze_limit_output = snooze_limit_input[0] + " times";
+                String snooze_limit_output = snooze_limit_input + " times";
                 limit_button.setText(snooze_limit_output);
             }
         });
