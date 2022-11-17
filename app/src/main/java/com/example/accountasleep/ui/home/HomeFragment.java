@@ -66,10 +66,19 @@ public class HomeFragment extends Fragment {
 //        CustomAdapter listAdapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);
 //        listView.setAdapter(listAdapter);
 
+        // alarm list page variables
+        LinearLayout alarm_page_header = binding.alarmPageHeaderLayout;
+        Button add_alarm_button = binding.addAlarmButton;
+        Button edit_alarm_button = binding.editAlarmButton;
+        LinearLayout alarm_list = binding.alarmListLayout;
+        LinearLayout alarm_setting_page = binding.alarmSettingPage;
+        // alarm setting page variables
         LinearLayout alarm_header = binding.alarmHeaderLayout;
         LinearLayout alarm_setting = binding.alarmSettingLayout;
         LinearLayout alarm_repeat = binding.repeatSetterLayout;
         LinearLayout alarm_snooze = binding.snoozeSetterLayout;
+        Button cancel_button = binding.cancelButton;
+        Button done_button = binding.doneButton;
         Button repeat_button = binding.repeatButton;
         Button duration_button = binding.durationButton;
         Button limit_button = binding.snoozeLimitButton;
@@ -81,6 +90,52 @@ public class HomeFragment extends Fragment {
         NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
         NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
 
+        //Edit alarm
+        edit_alarm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alarm_setting_page.setVisibility(View.VISIBLE);
+                alarm_page_header.setVisibility(View.GONE);
+                alarm_list.setVisibility(View.GONE);
+
+                // TODO: add in extra functionality
+                // - change header name in alarm setting
+                // - set fields in the alarm setting page to the
+                // current settings of the alarm we are editing
+            }
+        });
+
+        //Add alarm
+        add_alarm_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alarm_setting_page.setVisibility(View.VISIBLE);
+                alarm_page_header.setVisibility(View.GONE);
+                alarm_list.setVisibility(View.GONE);
+
+                // TODO: add the new alarm and its settings to the alarm list view
+            }
+        });
+
+        //Cancel alarm setting
+        cancel_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                alarm_setting_page.setVisibility(View.GONE);
+                alarm_page_header.setVisibility(View.VISIBLE);
+                alarm_list.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Save alarm setting
+        done_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                alarm_setting_page.setVisibility(View.GONE);
+                alarm_page_header.setVisibility(View.VISIBLE);
+                alarm_list.setVisibility(View.VISIBLE);
+            }
+        });
 
         //Delete alarm TODO: Delete memory and go back to alarm page
         delete_button.setOnClickListener(new View.OnClickListener(){

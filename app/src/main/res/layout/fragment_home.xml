@@ -29,7 +29,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
+
+        <!--This is the layout for alarm page header
+            id = alarm_page_header_layout-->
+        <LinearLayout
+            android:id="@+id/alarm_page_header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/edit_alarm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:textColor="#8BC34A"
+                android:layout_weight="1"
+                android:text="Edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_alarm"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp" />
+
+            <Button
+                android:id="@+id/add_alarm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:textColor="#8BC34A"
+                android:layout_weight="1"
+                android:text="Add" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/darker_gray"/>
+
+        <!--Here starts the code of alarm list page!-->
         <LinearLayout
             android:id="@+id/alarm_list_layout"
             android:layout_width="match_parent"
@@ -48,10 +91,11 @@
 
     <!-- Code for Alarm Settings page -->
     <LinearLayout
+        android:id="@+id/alarm_setting_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <!--This is the layout for alarm settings header
             id = alarm_header_layout-->
@@ -62,7 +106,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
@@ -80,7 +124,7 @@
                 android:layout_marginTop="10dp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/done_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
