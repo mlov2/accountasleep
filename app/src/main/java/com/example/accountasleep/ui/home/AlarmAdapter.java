@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -49,6 +50,13 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
 
         TextView label = (TextView) listItem.findViewById(R.id.alarm_label);
         label.setText(currentAlarm.getAlarmLabel());
+
+        ImageView sendMsg = (ImageView) listItem.findViewById(R.id.send_msg);
+        if (currentAlarm.getAlarmSendMsg()) {
+            sendMsg.setVisibility(View.VISIBLE);
+        } else {
+            sendMsg.setVisibility(View.GONE);
+        }
 
         if (currentAlarm.getAlarmSnoozeInterval() != -1 && currentAlarm.getAlarmSnoozeFrequency() != -1) {
             LinearLayout snooze_linear_layout = (LinearLayout) listItem.findViewById(R.id.snooze_layout);

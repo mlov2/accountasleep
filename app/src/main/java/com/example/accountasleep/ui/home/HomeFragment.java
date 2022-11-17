@@ -66,9 +66,9 @@ public class HomeFragment extends Fragment {
         lv = (ListView) root.findViewById(R.id.alarm_list_view);
 
         alarmlist = new ArrayList<>();
-        alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", 10, 3, true));
-        alarmlist.add(new Alarm("9:00", "AM", "TTh", "CS 421 HW", 8, 5, false));
-        alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", -1, -1, true));
+        alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", true, 10, 3, true));
+        alarmlist.add(new Alarm("9:00", "AM", "TTh", "CS 421 HW", false, 8, 5, false));
+        alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", false, -1, -1, true));
 
 //        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
 //        CustomAdapter adapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);
@@ -196,6 +196,8 @@ public class HomeFragment extends Fragment {
                 if (hour > 12) {
                     hour = hour - 12;
                     save_alarm_time_of_day = "PM";
+                } else {
+                    save_alarm_time_of_day = "AM";
                 }
                 int minute = alarm_time.getCurrentMinute();
                 save_alarm_time = "";
@@ -257,10 +259,11 @@ public class HomeFragment extends Fragment {
                     if (alarm_repeat[5]) alarm_repeat_str += "F";
                     if (alarm_repeat[6]) alarm_repeat_str += "S";
                 }
+                boolean send_msg = (boolean) current_alarm.get(4);
                 int snooze_duration = (int) current_alarm.get(6);
                 int snooze_limit = (int) current_alarm.get(7);
 
-                alarmlist.add(new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, snooze_duration, snooze_limit, true));
+                alarmlist.add(new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
 
                 // reference to refresh list view: https://stackoverflow.com/questions/37460133/how-to-refresh-listview-in-a-custom-adapter
                 lv.setAdapter(adapter);

@@ -79,6 +79,16 @@
         android:visibility="gone">
 
         <ImageView
+            android:id="@+id/send_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:scaleY="1"
+            android:scaleX="1"
+            android:src="@drawable/ic_send_msg"/>
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
