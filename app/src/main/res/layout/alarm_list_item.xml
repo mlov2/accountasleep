@@ -14,11 +14,19 @@
             android:id="@+id/alarm_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:paddingLeft="15dp"
-            android:text="8:00 AM"
+            android:text="8:00"
             android:textColor="@color/black"
-            android:textSize="50dp" />
+            android:textSize="45dp" />
+
+        <TextView
+            android:id="@+id/alarm_am_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:text=" AM"
+            android:textColor="@color/black"
+            android:textSize="45dp" />
 
         <TextView
             android:id="@+id/alarm_days"
@@ -26,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="MW"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
     </LinearLayout>
 
@@ -43,15 +51,22 @@
             android:paddingLeft="15dp"
             android:text="CS 465 lecture"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:paddingLeft="100dp"
-            android:scaleX="1.5"
-            android:scaleY="1.5" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:scaleX="1.5"
+                android:scaleY="1.5" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -59,7 +74,8 @@
         android:id="@+id/snooze_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-5dp">
+        android:layout_marginTop="-5dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -76,17 +92,24 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:paddingLeft="5dp"
-            android:text="10 min"
+            android:text="10"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min x"
+            android:textColor="@color/black"
+            android:textSize="25dp"/>
 
         <TextView
             android:id="@+id/alarm_snooze_frequency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="x3"
+            android:text="3"
             android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
     </LinearLayout>
 

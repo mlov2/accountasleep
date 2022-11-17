@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -45,11 +46,16 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
         TextView label = (TextView) listItem.findViewById(R.id.alarm_label);
         label.setText(currentAlarm.getAlarmLabel());
 
-//        TextView snooze_interval = (TextView) listItem.findViewById(R.id.alarm_snooze_interval);
-//        snooze_interval.setText(currentAlarm.getAlarmSnoozeInterval());
-//
-//        TextView snooze_frequency = (TextView) listItem.findViewById(R.id.alarm_snooze_frequency);
-//        snooze_frequency.setText(currentAlarm.getAlarmSnoozeFrequency());
+        if (currentAlarm.getAlarmSnoozeInterval() != -1 && currentAlarm.getAlarmSnoozeFrequency() != -1) {
+            LinearLayout snooze_linear_layout = (LinearLayout) listItem.findViewById(R.id.snooze_layout);
+            snooze_linear_layout.setVisibility(View.VISIBLE);
+
+            TextView snooze_interval = (TextView) listItem.findViewById(R.id.alarm_snooze_interval);
+            snooze_interval.setText(Integer.toString(currentAlarm.getAlarmSnoozeInterval()));
+
+            TextView snooze_frequency = (TextView) listItem.findViewById(R.id.alarm_snooze_frequency);
+            snooze_frequency.setText(Integer.toString(currentAlarm.getAlarmSnoozeFrequency()));
+        }
 
         return listItem;
     }

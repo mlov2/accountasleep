@@ -42,13 +42,14 @@ public class HomeFragment extends Fragment {
 
         // references:
         // - to get listview to work: https://www.youtube.com/watch?v=7MRnL_slGrI
-        // - to create a custom adapter: TODO (refer to one of the links below)
+        // - to create a custom adapter: https://www.geeksforgeeks.org/custom-arrayadapter-with-listview-in-android/
         ListView lv = (ListView) root.findViewById(R.id.alarm_list_view);
 
         ArrayList<Alarm> alarmlist = new ArrayList<>();
-        alarmlist.add(new Alarm("8:00", "MW", "CS 465 lecture", 10, 3));
-
-        System.out.print(alarmlist.size());
+        // TODO: to make dynamic, do a for loop and populate each parameter with the elements from the respective arrays
+        alarmlist.add(new Alarm("8:00", "AM", "Mon Wed", "CS 465 lecture", 10, 3));
+        alarmlist.add(new Alarm("9:00", "AM", "Tues Thu", "CS 421 HW", 8, 5));
+        alarmlist.add(new Alarm("12:00", "AM", "M T W T F S S", "Go to bed", -1, -1));
 
 //        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
 //        CustomAdapter adapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);

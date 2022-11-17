@@ -2,13 +2,15 @@ package com.example.accountasleep.ui.home;
 
 public class Alarm {
     private String alarmTime;
+    private String alarmAmPm;
     private String alarmDays;
     private String alarmLabel;
     private int alarmSnoozeInterval;
     private int alarmSnoozeFrequency;
 
-    public Alarm(String alarmTime, String alarmDays, String alarmLabel, int alarmSnoozeInterval, int alarmSnoozeFrequency) {
+    public Alarm(String alarmTime, String alarmAmPm, String alarmDays, String alarmLabel, int alarmSnoozeInterval, int alarmSnoozeFrequency) {
         this.alarmTime = alarmTime;
+        this.alarmAmPm = alarmAmPm;
         this.alarmDays = alarmDays;
         this.alarmLabel = alarmLabel;
         this.alarmSnoozeInterval = alarmSnoozeInterval;
@@ -17,6 +19,10 @@ public class Alarm {
 
     public void setAlarmTime(String alarmTime) {
         this.alarmTime = alarmTime;
+    }
+
+    public void setAlarmAmPm(String alarmAmPm) {
+        this.alarmAmPm = alarmAmPm;
     }
 
     public void setAlarmDays(String alarmDays) {
@@ -37,6 +43,10 @@ public class Alarm {
 
     public String getAlarmTime() {
         return alarmTime;
+    }
+
+    public String getAlarmAmPm() {
+        return alarmAmPm;
     }
 
     public String getAlarmDays() {
