@@ -2,8 +2,10 @@ package com.example.accountasleep.ui.dashboard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.accountasleep.R;
 import com.example.accountasleep.databinding.FragmentDashboardBinding;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -37,8 +40,10 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
     ImageButton btn;
+    ImageButton cameraBtn;
     GridView gridView;
     ActivityResultLauncher<Intent> someActivityResultLauncher;
+    ActivityResultLauncher<Intent> cameraActivityResultLauncher;
     DashboardViewModel dashboardViewModel;
 
 
@@ -113,6 +118,43 @@ public class DashboardFragment extends Fragment {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 someActivityResultLauncher.launch(intent);
 
+            }
+        });
+
+        cameraActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            // There are no request codes
+                            Intent data = result.getData();
+                            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            photo.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                            String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), photo, "Title", null);
+                            Uri uri = Uri.parse(path);
+
+
+
+                            //Uri uri = data.getData();
+                            // Add Image Uri
+                            dashboardViewModel.addImgPath(uri);
+                            // Update Images Adapter
+                            ImagesAdapter imagesAdapter = new ImagesAdapter(getActivity(), dashboardViewModel.imgPaths);
+                            gridView.setAdapter(imagesAdapter);
+
+                        }
+                    }
+                });
+
+        cameraBtn = root.findViewById(R.id.openCamera);
+        cameraBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent open_camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                cameraActivityResultLauncher.launch(open_camera);
             }
         });
 
