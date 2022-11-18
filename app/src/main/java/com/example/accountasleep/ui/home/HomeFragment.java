@@ -139,6 +139,108 @@ public class HomeFragment extends Fragment {
         alarms_raw.add(alarm_raw);
     }
 
+    private void editAlarm(FragmentHomeBinding binding) {
+        TextView alarm_setting_header_label = binding.alarmSettingHeaderLabel;
+        EditText alarm_label = binding.alarmLabel;
+        TimePicker alarm_time = binding.fragmentCreatealarmTimePicker;
+        Button repeat_button = binding.repeatButton;
+        Switch send_msg_switch = binding.sendMessageSwitch;
+        Switch snooze_switch = binding.snoozeSwitch;
+        Button duration_button = binding.durationButton;
+        Button limit_button = binding.snoozeLimitButton;
+        NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
+        NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
+
+        // ensure alarm setting page header is set correctly
+        alarm_setting_header_value = "Edit Alarm";
+        alarm_setting_header_label.setText(alarm_setting_header_value);
+
+        // get all the settings for the alarm that was clicked
+        ArrayList<Object> curr_alarm = alarms_raw.get(edit_position);
+        String alarm_label_setting = (String) curr_alarm.get(0);
+        String alarm_time_setting = (String) curr_alarm.get(1);
+        String alarm_time_of_day_setting = (String) curr_alarm.get(2);
+        Boolean[] alarm_repeat_setting = (Boolean[]) curr_alarm.get(3);
+        boolean send_msg_setting = (boolean) curr_alarm.get(4);
+        boolean snooze_setting = (boolean) curr_alarm.get(5);
+        int snooze_duration_setting = (int) curr_alarm.get(6);
+        int snooze_limit_setting = (int) curr_alarm.get(7);
+
+        // display the existing setting in the alarm setting page (backend and frontend)
+        alarm_label.setText(alarm_label_setting);
+
+        // set time setting
+        int hour = Integer.valueOf(alarm_time_setting.split(":")[0]);
+        int minute = Integer.valueOf(alarm_time_setting.split(":")[1]);
+        if (alarm_time_of_day_setting == "PM") {
+            hour = hour + 12;
+        } else {
+            if (hour == 12) {
+                hour = 0;
+            }
+        }
+        alarm_time.setCurrentHour(hour);
+        alarm_time.setCurrentMinute(minute);
+
+        // set repeat setting
+        binding.Sunday.setChecked(alarm_repeat_setting[0]);
+        binding.Monday.setChecked(alarm_repeat_setting[1]);
+        binding.Tuesday.setChecked(alarm_repeat_setting[2]);
+        binding.Wednesday.setChecked(alarm_repeat_setting[3]);
+        binding.Thursday.setChecked(alarm_repeat_setting[4]);
+        binding.Friday.setChecked(alarm_repeat_setting[5]);
+        binding.Saturday.setChecked(alarm_repeat_setting[6]);
+
+        String repeat_output = "";
+        if(binding.Monday.isChecked()){
+            repeat_output += "MON ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Tuesday.isChecked()){
+            repeat_output += "TUE ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Wednesday.isChecked()){
+            repeat_output += "WED ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Thursday.isChecked()){
+            repeat_output += "THU ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Friday.isChecked()){
+            repeat_output += "FRI ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Saturday.isChecked()){
+            repeat_output += "SAT ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Sunday.isChecked()){
+            repeat_output += "SUN ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+
+        if(repeat_output.length()==0){
+            repeat_button.setText("NEVER");
+        }else{
+            repeat_button.setText(repeat_output);
+        }
+
+        // set custom settings
+        send_msg_switch.setChecked(send_msg_setting);
+        snooze_switch.setChecked(snooze_setting);
+        snooze_duration_input = snooze_duration_setting;
+        snooze_limit_input = snooze_limit_setting;
+        snooze_duration_number_picker.setValue(snooze_duration_input);
+        snooze_limit_number_picker.setValue(snooze_limit_input);
+
+        String snooze_duration_output = snooze_duration_input + " mins";
+        duration_button.setText(snooze_duration_output);
+        String snooze_limit_output = snooze_limit_input + " times";
+        limit_button.setText(snooze_limit_output);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 //        HomeViewModel homeViewModel =
@@ -150,12 +252,10 @@ public class HomeFragment extends Fragment {
         // alarm list page variables
         LinearLayout alarm_page_header = binding.alarmPageHeaderLayout;
         Button add_alarm_button = binding.addAlarmButton;
-        Button edit_alarm_button = binding.editAlarmButton;
         LinearLayout alarm_list = binding.alarmListLayout;
 
         // alarm setting page variables
         LinearLayout alarm_setting_page = binding.alarmSettingPage;
-        LinearLayout alarm_header = binding.alarmHeaderLayout;
         Button cancel_button = binding.cancelButton;
         TextView alarm_setting_header_label = binding.alarmSettingHeaderLabel;
         Button done_button = binding.doneButton;
@@ -182,6 +282,7 @@ public class HomeFragment extends Fragment {
         lv = (ListView) root.findViewById(R.id.alarm_list_view);
 
         alarmlist = new ArrayList<>();
+        // hardcoded alarms
         populateHardcodedAlarms("CS 465 lecture", "8:00", "AM", new Boolean[]{false, true, false, true, false, false, false}, true, true, 10, 3);
         populateHardcodedAlarms("CS 465 studio", "8:00", "AM", new Boolean[]{false, false, false, false, false, true, false}, true, true, 8, 5);
         populateHardcodedAlarms("Go to bed", "12:00", "AM", new Boolean[]{true, true, true, true, true, true, true}, false, false, -1, -1);
@@ -206,94 +307,7 @@ public class HomeFragment extends Fragment {
                 // show alarm setting page
                 alarm_setting_page.setVisibility(View.VISIBLE);
 
-                // ensure alarm setting page header is set correctly
-                alarm_setting_header_value = "Edit Alarm";
-                alarm_setting_header_label.setText(alarm_setting_header_value);
-
-                // get all the settings for the alarm that was clicked
-                ArrayList<Object> curr_alarm = alarms_raw.get(position);
-                String alarm_label_setting = (String) curr_alarm.get(0);
-                String alarm_time_setting = (String) curr_alarm.get(1);
-                String alarm_time_of_day_setting = (String) curr_alarm.get(2);
-                Boolean[] alarm_repeat_setting = (Boolean[]) curr_alarm.get(3);
-                boolean send_msg_setting = (boolean) curr_alarm.get(4);
-                boolean snooze_setting = (boolean) curr_alarm.get(5);
-                int snooze_duration_setting = (int) curr_alarm.get(6);
-                int snooze_limit_setting = (int) curr_alarm.get(7);
-
-                // display the existing setting in the alarm setting page (backend and frontend)
-                alarm_label.setText(alarm_label_setting);
-
-                // set time setting
-                int hour = Integer.valueOf(alarm_time_setting.split(":")[0]);
-                int minute = Integer.valueOf(alarm_time_setting.split(":")[1]);
-                if (alarm_time_of_day_setting == "PM") {
-                    hour = hour + 12;
-                } else {
-                    if (hour == 12) {
-                        hour = 0;
-                    }
-                }
-                alarm_time.setCurrentHour(hour);
-                alarm_time.setCurrentMinute(minute);
-
-                // set repeat setting
-                binding.Sunday.setChecked(alarm_repeat_setting[0]);
-                binding.Monday.setChecked(alarm_repeat_setting[1]);
-                binding.Tuesday.setChecked(alarm_repeat_setting[2]);
-                binding.Wednesday.setChecked(alarm_repeat_setting[3]);
-                binding.Thursday.setChecked(alarm_repeat_setting[4]);
-                binding.Friday.setChecked(alarm_repeat_setting[5]);
-                binding.Saturday.setChecked(alarm_repeat_setting[6]);
-
-                String repeat_output = "";
-                if(binding.Monday.isChecked()){
-                    repeat_output += "MON ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-                if(binding.Tuesday.isChecked()){
-                    repeat_output += "TUE ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-                if(binding.Wednesday.isChecked()){
-                    repeat_output += "WED ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-                if(binding.Thursday.isChecked()){
-                    repeat_output += "THU ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-                if(binding.Friday.isChecked()){
-                    repeat_output += "FRI ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-                if(binding.Saturday.isChecked()){
-                    repeat_output += "SAT ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-                if(binding.Sunday.isChecked()){
-                    repeat_output += "SUN ";
-                    repeat_button.setPadding(10,0,0,0);
-                }
-
-                if(repeat_output.length()==0){
-                    repeat_button.setText("NEVER");
-                }else{
-                    repeat_button.setText(repeat_output);
-                }
-
-                // set custom settings
-                send_msg_switch.setChecked(send_msg_setting);
-                snooze_switch.setChecked(snooze_setting);
-                snooze_duration_input = snooze_duration_setting;
-                snooze_limit_input = snooze_limit_setting;
-                snooze_duration_number_picker.setValue(snooze_duration_input);
-                snooze_limit_number_picker.setValue(snooze_limit_input);
-
-                String snooze_duration_output = snooze_duration_input + " mins";
-                duration_button.setText(snooze_duration_output);
-                String snooze_limit_output = snooze_limit_input + " times";
-                limit_button.setText(snooze_limit_output);
+                editAlarm(binding);
             }
         });
 
@@ -439,7 +453,7 @@ public class HomeFragment extends Fragment {
                     alarms_raw.set(edit_position, alarm_raw);
                 }
 
-                // update alarm list page
+                // update alarm list page to include the new/edited alarm
                 ArrayList<Object> current_alarm = alarm_raw;
                 String alarm_label = (String) current_alarm.get(0);
                 String alarm_time = (String) current_alarm.get(1);

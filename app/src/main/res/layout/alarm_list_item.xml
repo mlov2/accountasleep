@@ -74,11 +74,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/snooze_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-5dp"
-        android:visibility="gone">
+        android:layout_marginTop="-5dp">
 
         <ImageView
             android:id="@+id/send_msg"
@@ -89,6 +87,13 @@
             android:scaleY="1"
             android:scaleX="1"
             android:src="@drawable/ic_send_msg"/>
+
+        <LinearLayout
+            android:id="@+id/snooze_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:visibility="gone">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -123,6 +128,7 @@
             android:text="3"
             android:textColor="@color/black"
             android:textSize="25dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
