@@ -57,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- reference to resolve issue with clicking a list item: https://stackoverflow.com/questions/5551042/onitemclicklistener-not-working-in-listview -->
             <Switch
                 android:id="@+id/alarm_enable"
                 android:layout_width="wrap_content"
@@ -65,7 +66,8 @@
                 android:layout_alignParentRight="true"
                 android:paddingRight="10dp"
                 android:scaleX="1.5"
-                android:scaleY="1.5" />
+                android:scaleY="1.5"
+                android:focusable="false"/>
 
         </RelativeLayout>
 
