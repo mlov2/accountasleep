@@ -41,9 +41,10 @@ public class HomeFragment extends Fragment {
     private ListView lv;
 
     private String alarm_setting_header_value = "";
-    private int snooze_duration_input = 5;
-    private int snooze_limit_input = 1;
+    private int snooze_duration_input = -1;
+    private int snooze_limit_input = -1;
 
+    // variables for saving an alarm
     ArrayList<ArrayList<Object>> alarms_raw = new ArrayList<>();
     private String save_alarm_label = "";
     private String save_alarm_time = "";
@@ -54,6 +55,74 @@ public class HomeFragment extends Fragment {
     private int save_snooze_duration = -1;
     private int save_snooze_limit = -1;
     private int edit_position;
+
+    private void updateListView() {
+        // reference to refresh list view: https://stackoverflow.com/questions/37460133/how-to-refresh-listview-in-a-custom-adapter
+        lv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        lv.invalidateViews();
+        lv.refreshDrawableState();
+    }
+
+    private void resetToDefaultSettings(FragmentHomeBinding binding) {
+        EditText alarm_label = binding.alarmLabel;
+        Button repeat_button = binding.repeatButton;
+        Switch send_msg_switch = binding.sendMessageSwitch;
+        Switch snooze_switch = binding.snoozeSwitch;
+
+        // reset label
+        alarm_label.setText("Alarm");
+        // reset repeat settings
+        binding.Sunday.setChecked(false);
+        binding.Monday.setChecked(false);
+        binding.Tuesday.setChecked(false);
+        binding.Wednesday.setChecked(false);
+        binding.Thursday.setChecked(false);
+        binding.Friday.setChecked(false);
+        binding.Saturday.setChecked(false);
+
+        String repeat_output = "";
+        if(binding.Monday.isChecked()){
+            repeat_output += "MON ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Tuesday.isChecked()){
+            repeat_output += "TUE ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Wednesday.isChecked()){
+            repeat_output += "WED ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Thursday.isChecked()){
+            repeat_output += "THU ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Friday.isChecked()){
+            repeat_output += "FRI ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Saturday.isChecked()){
+            repeat_output += "SAT ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+        if(binding.Sunday.isChecked()){
+            repeat_output += "SUN ";
+            repeat_button.setPadding(10,0,0,0);
+        }
+
+        if(repeat_output.length()==0){
+            repeat_button.setText("NEVER");
+        }else{
+            repeat_button.setText(repeat_output);
+        }
+        // reset send a message settings
+        send_msg_switch.setChecked(true);
+        snooze_switch.setChecked(false);
+        // reset snooze settings
+        snooze_duration_input = -1;
+        snooze_limit_input = -1;
+    }
 
     private void populateHardcodedAlarms(String alarm_label, String alarm_time, String alarm_time_of_day,
                                          Boolean[] alarm_repeat, boolean send_a_msg, boolean snooze,
@@ -300,6 +369,8 @@ public class HomeFragment extends Fragment {
                 // show alarm list page
                 alarm_page_header.setVisibility(View.VISIBLE);
                 alarm_list.setVisibility(View.VISIBLE);
+
+                resetToDefaultSettings(binding);
             }
         });
 
@@ -378,9 +449,9 @@ public class HomeFragment extends Fragment {
                 if (alarm_repeat[0] && alarm_repeat[1] && alarm_repeat[2] && alarm_repeat[3]
                         && alarm_repeat[4] && alarm_repeat[5] && alarm_repeat[6]) {
                     alarm_repeat_str = "Every day";
-                } else if (alarm_repeat[1] && alarm_repeat[2] && alarm_repeat[3] && alarm_repeat[4] && alarm_repeat[5]) {
+                } else if (!alarm_repeat[0] && alarm_repeat[1] && alarm_repeat[2] && alarm_repeat[3] && alarm_repeat[4] && alarm_repeat[5] && !alarm_repeat[6]) {
                     alarm_repeat_str = "Every weekday";
-                } else if (alarm_repeat[0] && alarm_repeat[6]) {
+                } else if (alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && alarm_repeat[6]) {
                     alarm_repeat_str = "Every weekend";
                 } else {
                     if (alarm_repeat[0]) alarm_repeat_str += "S";
@@ -403,26 +474,39 @@ public class HomeFragment extends Fragment {
                     alarmlist.set(edit_position, new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
                 }
 
-                // reference to refresh list view: https://stackoverflow.com/questions/37460133/how-to-refresh-listview-in-a-custom-adapter
-                lv.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-                lv.invalidateViews();
-                lv.refreshDrawableState();
+                updateListView();
 
                 if (alarm_setting_header_value == "Add Alarm") {
                     Toast.makeText(getContext(), "Alarm Created", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Alarm Edited", Toast.LENGTH_SHORT).show();
                 }
+
+                resetToDefaultSettings(binding);
             }
         });
 
-        //Delete alarm TODO: Delete memory and go back to alarm page
+        //Delete alarm
         delete_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                alarm_header.setVisibility(View.INVISIBLE);
-                alarm_setting.setVisibility(View.INVISIBLE);
+                // hide alarm snooze setting page
+                alarm_setting_page.setVisibility(View.GONE);
+
+                // display alarm list page
+                alarm_page_header.setVisibility(View.VISIBLE);
+                alarm_list.setVisibility(View.VISIBLE);
+
+                // remove alarm from alarm list if editing an alarm
+                if (alarm_setting_header_value == "Edit Alarm") {
+                    alarmlist.remove(edit_position);
+                    alarms_raw.remove(edit_position);
+
+                    updateListView();
+                }
+
+                // reset values to default values for an alarm
+                resetToDefaultSettings(binding);
             }
         });
 
