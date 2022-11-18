@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -39,6 +41,23 @@ public class DashboardFragment extends Fragment {
     ActivityResultLauncher<Intent> someActivityResultLauncher;
     DashboardViewModel dashboardViewModel;
 
+
+    // Activity: Delete Image
+    ActivityResultLauncher<Intent> intentActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getData() != null && result.getResultCode() == Activity.RESULT_OK) {
+                // Remove Image Uri
+                dashboardViewModel.removeImgPath(Uri.parse(result.getData().getStringExtra("ret")));
+                // Update Images Adapter
+                ImagesAdapter imagesAdapter = new ImagesAdapter(getActivity(), dashboardViewModel.imgPaths);
+                gridView.setAdapter(imagesAdapter);
+            } else {
+                System.out.println("Delete Null!");
+            }
+        }
+    });
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -54,6 +73,17 @@ public class DashboardFragment extends Fragment {
         ImagesAdapter imagesAdapter = new ImagesAdapter(getActivity(), dashboardViewModel.imgPaths);
         gridView.setAdapter(imagesAdapter);
 
+        // Show Image Detail when click the item
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ImageDetail.class);
+                intent.putExtra("image", String.valueOf(dashboardViewModel.imgPaths[position])); // put image data in Intent
+                intentActivityResultLauncher.launch(intent);
+            }
+        });
+
+        // Use System Photo Gallery
         someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {

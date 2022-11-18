@@ -29,9 +29,15 @@ public class DashboardViewModel extends ViewModel {
     }
 
     public void addImgPath(Uri imgPath){
-        ArrayList<Uri> list2 = new ArrayList<>(Arrays.asList(imgPaths));
-        list2.add(0, imgPath);
-        imgPaths = list2.toArray(new Uri[list2.size()]);
+        ArrayList<Uri> listTmp = new ArrayList<>(Arrays.asList(imgPaths));
+        listTmp.add(0, imgPath);
+        imgPaths = listTmp.toArray(new Uri[listTmp.size()]);
+    }
+
+    public void removeImgPath(Uri imgPath){
+        ArrayList<Uri> listTmp = new ArrayList<>(Arrays.asList(imgPaths));
+        listTmp.remove(imgPath);
+        imgPaths = listTmp.toArray(new Uri[listTmp.size()]);
     }
 
 
