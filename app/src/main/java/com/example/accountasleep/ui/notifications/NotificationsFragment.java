@@ -30,24 +30,12 @@ public class NotificationsFragment extends Fragment {
         NotificationsViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
 
+        // Inflate the Account page xml
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
 
-//        final TextView textView = binding.textNotifications;
-//        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
+        // TEMPORARY button for starting the RingActivity
+        // TODO: delete after this is linked to be set off by actual alarms
         final Button startQuizButton = binding.btnStartQuiz;
-//        startQuizButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                textView.setText("Add 1!");
-//                notificationsViewModel.changeText("Add 2");
-////                textView.setText("Add 3!");
-//
-//            }
-//        });
-
-        View view = inflater.inflate(R.layout.activity_quiz, container, false);
-
         startQuizButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), RingActivity.class);
@@ -55,10 +43,9 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-
+        // Button logic for "Manage Contacts"
         final Button manageContactsButton = binding.btnSelectManageContacts;
         final TextView contactText = binding.textContact1;
-
         manageContactsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 binding.linlayAccountPage.setVisibility(View.GONE);

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel;
 public class NotificationsViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
-//    private Integer counter = 0;
     private String contact1Number;
 
     public NotificationsViewModel() {
@@ -18,12 +17,6 @@ public class NotificationsViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
-
-
-//    public void changeText(String text) {
-//        counter++;
-//        mText.setValue(String.valueOf(counter));
-//    }
 
     public void setContact1Number(String contact1Number) {
         this.contact1Number = contact1Number;
