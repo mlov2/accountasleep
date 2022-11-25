@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="Quiz Screen"
         android:layout_marginBottom="70dp"
-        android:visibility="gone"
+        android:visibility="visible"
         />
 
         <!--  Default Account Page  -->
