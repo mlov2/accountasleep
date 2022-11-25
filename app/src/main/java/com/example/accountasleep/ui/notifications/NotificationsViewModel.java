@@ -15,6 +15,9 @@ public class NotificationsViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
     private HashMap<String, String> contacts = new LinkedHashMap<>();
 
+    private final String defaultMessage = "Uh oh! I slept past my alarm today! I wasn't able to stop this photo from sending to you.";
+    private String message = "";
+
     public NotificationsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is notifications fragment");
@@ -37,6 +40,18 @@ public class NotificationsViewModel extends ViewModel {
         for (String name : newContacts.keySet()) {
             contacts.put(name, newContacts.get(name));
         }
+    }
+
+    public String getDefaultMessage() {
+        return defaultMessage;
+    }
+
+    public void setMessage(String newMessage) {
+        message = newMessage;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
 }

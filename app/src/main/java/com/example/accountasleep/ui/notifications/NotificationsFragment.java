@@ -51,6 +51,8 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
+        //  ============ MANAGE CONTACTS PAGE LOGIC ============
+
         // Button logic for "Manage Contacts"
         final Button manageContactsButton = binding.btnSelectManageContacts;
         manageContactsButton.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +184,57 @@ public class NotificationsFragment extends Fragment {
                 binding.btnStartQuiz.setVisibility(View.VISIBLE);
             }
         });
+
+        //  ============ EDIT MESSAGE PAGE LOGIC ============
+        Button editMessageButton = binding.btnEditMessage;
+        editMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.linlayAccountPage.setVisibility(View.GONE);
+                binding.btnStartQuiz.setVisibility(View.GONE);
+                binding.rellayEditMessage.setVisibility(View.VISIBLE);
+
+                // Load in the last saved message if it's not the default empty string
+                if (!notificationsViewModel.getMessage().equals("")) {
+                    binding.edittextMessage.setText(notificationsViewModel.getMessage());
+                }
+            }
+        });
+
+        Button useDefaultMsgButton = binding.btnDefaultMessage;
+        useDefaultMsgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.edittextMessage.setText(notificationsViewModel.getDefaultMessage());
+            }
+        });
+
+        Button confirmMsgButton = binding.btnEditMessageConfirm;
+        confirmMsgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // If the text box is empty or only spaces
+                if (binding.edittextMessage.getText().toString().replaceAll("\\s", "").equals("")) {
+                    Toast.makeText(getActivity().getBaseContext(), "Please enter a message or use the default.", Toast.LENGTH_SHORT).show();
+                } else {
+                    notificationsViewModel.setMessage(binding.edittextMessage.getText().toString());
+                    binding.rellayEditMessage.setVisibility(View.GONE);
+                    binding.linlayAccountPage.setVisibility(View.VISIBLE);
+                    binding.btnStartQuiz.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        Button cancelMsgButton = binding.btnEditMessageCancel;
+        cancelMsgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.rellayEditMessage.setVisibility(View.GONE);
+                binding.linlayAccountPage.setVisibility(View.VISIBLE);
+                binding.btnStartQuiz.setVisibility(View.VISIBLE);
+            }
+        });
+
         return binding.getRoot();
     }
 

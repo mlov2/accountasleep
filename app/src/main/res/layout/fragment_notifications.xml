@@ -105,6 +105,7 @@
                 android:layout_marginHorizontal="10dp"
                 >
                 <Button
+                    android:id="@+id/btn_edit_message"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center_vertical"
@@ -140,29 +141,6 @@
                 android:paddingVertical="10dp"
                 android:background="@color/material_dynamic_neutral95"
                 />
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/text_manage_contacts_header"-->
-<!--                android:paddingHorizontal="20dp"-->
-<!--                android:paddingTop="10dp"-->
-<!--                android:textSize="24sp"-->
-<!--                android:text="No contacts selected.\n\nAdd individual contacts to select message recipients from when setting alarms."-->
-<!--                android:textAlignment="center"-->
-<!--                />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/text_contact_instructions"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/text_manage_contacts_header"-->
-<!--                android:paddingHorizontal="20dp"-->
-<!--                android:paddingTop="10dp"-->
-<!--                android:textSize="24sp"-->
-<!--                android:text="Add individual contacts to select message recipients from when setting alarms."-->
-<!--                android:textAlignment="center"-->
-<!--                />-->
 
             <TextView
                 android:id="@+id/text_contact_instructions"
@@ -495,9 +473,89 @@
 <!--                android:drawableTint="#FFFFFF"-->
 <!--                android:drawableLeft="@drawable/ic_add_individual"-->
 <!--                />-->
-
-
         </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rellay_edit_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="60dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text_edit_message_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Message"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:paddingVertical="10dp"
+            android:background="@color/material_dynamic_neutral95"
+            />
+
+        <TextView
+            android:id="@+id/text_message_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_edit_message_header"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="10dp"
+            android:textSize="24sp"
+            android:text="Customize the message that you want to be sent with your photo, or choose the default message!"
+            android:textAlignment="center"
+            />
+
+        <EditText
+            android:id="@+id/edittext_message"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/btn_default_message"
+            android:hint="Enter your message here..."
+            android:text="Uh oh! I slept past my alarm today! I wasn't able to stop this photo from sending to you."
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="top"
+            />
+
+        <Button
+            android:id="@+id/btn_default_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_message_instructions"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="#A7A6bA"
+            android:text="Use Default Message" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true">
+
+            <Button
+                android:id="@+id/btn_edit_message_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:backgroundTint="#A7A6bA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <Button
+                android:id="@+id/btn_edit_message_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Confirm"
+                app:layout_constraintStart_toEndOf="@id/btn_edit_message_cancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
