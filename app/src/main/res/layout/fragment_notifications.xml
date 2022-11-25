@@ -20,6 +20,7 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+    <!-- Start quiz button -->
     <Button
         android:id="@+id/btn_start_quiz"
         android:layout_width="wrap_content"
@@ -29,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="Quiz Screen"
         android:layout_marginBottom="70dp"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
         <!--  Default Account Page  -->
@@ -176,13 +177,23 @@
                 />
 
             <EditText
-                android:id="@+id/edittext_phone_number"
+                android:id="@+id/edittext_contact_name"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_contact_instructions"
                 android:paddingHorizontal="20dp"
                 android:paddingTop="20dp"
-                android:hint="Insert phone number here"
+                android:hint="Enter Contact Name"
+                />
+
+            <EditText
+                android:id="@+id/edittext_phone_number"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edittext_contact_name"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="20dp"
+                android:hint="Enter Phone Number"
                 />
 
 <!--            <Button-->
@@ -199,27 +210,224 @@
 <!--                />-->
 
             <ImageButton
-                android:id="@+id/imgbtn_add_phone_number"
+                android:id="@+id/imgbtn_add_contact"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/ic_add"
-                android:layout_marginBottom="60dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
                 android:layout_toRightOf="@id/edittext_phone_number"
-                android:layout_alignTop="@id/edittext_phone_number"
+                android:layout_alignTop="@id/edittext_contact_name"
                 />
 
-            <TextView
-                android:id="@+id/text_contact_1"
-                android:layout_width="wrap_content"
+
+            <!-- Contact 1 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/edittext_phone_number"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="10dp"
-                android:textSize="24sp"
-                android:text=""
-                android:textAlignment="center"
-                />
+                android:id="@+id/rellay_contact_1">
+
+                <TextView
+                    android:id="@+id/text_contact_name_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="5dp"
+                    android:textSize="24sp"
+                    android:text="Contact 1"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/text_contact_number_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_contact_name_1"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:text="773-777-7777"
+                    android:textAlignment="center"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imgbtn_delete_contact_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/text_contact_number_1"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:backgroundTint="@color/material_dynamic_neutral100"
+                    app:tint="@color/material_dynamic_neutral60" />
+            </RelativeLayout>
+
+
+            <!-- Contact 2 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rellay_contact_1"
+                android:id="@+id/rellay_contact_2">
+                <TextView
+                    android:id="@+id/text_contact_name_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="5dp"
+                    android:textSize="24sp"
+                    android:text="Contact 2"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/text_contact_number_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_contact_name_2"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:text="773-777-7777"
+                    android:textAlignment="center"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imgbtn_delete_contact_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/text_contact_number_2"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:backgroundTint="@color/material_dynamic_neutral100"
+                    app:tint="@color/material_dynamic_neutral60" />
+            </RelativeLayout>
+
+            <!-- Contact 3 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rellay_contact_2"
+                android:id="@+id/rellay_contact_3">
+                <TextView
+                    android:id="@+id/text_contact_name_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="5dp"
+                    android:textSize="24sp"
+                    android:text="Contact 3"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/text_contact_number_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_contact_name_3"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:text="773-777-7777"
+                    android:textAlignment="center"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imgbtn_delete_contact_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/text_contact_number_3"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:backgroundTint="@color/material_dynamic_neutral100"
+                    app:tint="@color/material_dynamic_neutral60" />
+            </RelativeLayout>
+
+            <!-- Contact 2 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rellay_contact_3"
+                android:id="@+id/rellay_contact_4">
+                <TextView
+                    android:id="@+id/text_contact_name_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="5dp"
+                    android:textSize="24sp"
+                    android:text="Contact 4"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/text_contact_number_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_contact_name_4"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:text="773-777-7777"
+                    android:textAlignment="center"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imgbtn_delete_contact_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/text_contact_number_4"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:backgroundTint="@color/material_dynamic_neutral100"
+                    app:tint="@color/material_dynamic_neutral60" />
+            </RelativeLayout>
+
+            <!-- Contact 2 -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rellay_contact_4"
+                android:id="@+id/rellay_contact_5">
+                <TextView
+                    android:id="@+id/text_contact_name_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="5dp"
+                    android:textSize="24sp"
+                    android:text="Contact 5"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/text_contact_number_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_contact_name_5"
+                    android:paddingHorizontal="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="italic"
+                    android:text="773-777-7777"
+                    android:textAlignment="center"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imgbtn_delete_contact_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/text_contact_number_5"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_cancel"
+                    android:backgroundTint="@color/material_dynamic_neutral100"
+                    app:tint="@color/material_dynamic_neutral60" />
+            </RelativeLayout>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
