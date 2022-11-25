@@ -98,6 +98,57 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
+        // Delete Contact 1
+        final ImageButton deleteContact1 = binding.imgbtnDeleteContact1;
+        deleteContact1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView contact1Name = binding.textContactName1;
+                initialContacts.remove(contact1Name.getText());
+                updateContacts();
+            }
+        });
+
+        // Delete Contact 2
+        final ImageButton deleteContact2 = binding.imgbtnDeleteContact2;
+        deleteContact2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialContacts.remove(binding.textContactName2.getText());
+                updateContacts();
+            }
+        });
+
+        // Delete Contact 3
+        final ImageButton deleteContact3 = binding.imgbtnDeleteContact3;
+        deleteContact3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialContacts.remove(binding.textContactName3.getText());
+                updateContacts();
+            }
+        });
+
+        // Delete Contact 4
+        final ImageButton deleteContact4 = binding.imgbtnDeleteContact4;
+        deleteContact4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialContacts.remove(binding.textContactName4.getText());
+                updateContacts();
+            }
+        });
+
+        // Delete Contact 5
+        final ImageButton deleteContact5 = binding.imgbtnDeleteContact5;
+        deleteContact5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialContacts.remove(binding.textContactName5.getText());
+                updateContacts();
+            }
+        });
+
         final Button confirmContactsButton = binding.btnManageContactsConfirm;
         confirmContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
