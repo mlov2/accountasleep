@@ -43,11 +43,11 @@
                 android:id="@+id/edit_alarm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#00FFFFFF"
-                android:textColor="#8BC34A"
                 android:layout_weight="1"
+                android:background="#00FFFFFF"
                 android:text="Edit"
-                android:visibility="invisible"/>
+                android:textColor="#08F6F8F4"
+                android:visibility="visible" />
 
             <TextView
                 android:layout_width="wrap_content"

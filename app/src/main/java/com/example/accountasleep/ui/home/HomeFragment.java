@@ -1,12 +1,11 @@
 package com.example.accountasleep.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -21,13 +20,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.accountasleep.R;
+import com.example.accountasleep.RingActivity;
 import com.example.accountasleep.databinding.FragmentHomeBinding;
 
-import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class HomeFragment extends Fragment {
     // Array of strings...
@@ -39,6 +40,10 @@ public class HomeFragment extends Fragment {
     private AlarmAdapter adapter;
     private ArrayList<Alarm> alarmlist;
     private ListView lv;
+
+    public ArrayList<Alarm> getAlarmList(){
+        return alarmlist;
+    }
 
     private String alarm_setting_header_value = "";
     private int snooze_duration_input = -1;
@@ -55,6 +60,7 @@ public class HomeFragment extends Fragment {
     private int save_snooze_duration = -1;
     private int save_snooze_limit = -1;
     private int edit_position;
+
 
     private void updateListView() {
         // reference to refresh list view: https://stackoverflow.com/questions/37460133/how-to-refresh-listview-in-a-custom-adapter
@@ -241,6 +247,7 @@ public class HomeFragment extends Fragment {
         limit_button.setText(snooze_limit_output);
     }
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 //        HomeViewModel homeViewModel =
@@ -275,6 +282,9 @@ public class HomeFragment extends Fragment {
         NumberPicker snooze_duration_number_picker = binding.snoozeDurationNumberPicker;
         NumberPicker snooze_limit_number_picker = binding.snoozeLimitNumberPicker;
         Button snooze_ok_button = binding.okButtonSnooze;
+        //Test
+        Button edit_button = binding.editAlarmButton;
+
 
         // references:
         // - to get listview to work: https://www.youtube.com/watch?v=7MRnL_slGrI
@@ -289,7 +299,6 @@ public class HomeFragment extends Fragment {
         alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", true, 10, 3, true));
         alarmlist.add(new Alarm("8:00", "AM", "F", "CS 465 studio", true, 8, 5, false));
         alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", false, -1, -1, true));
-
 //        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
 //        CustomAdapter adapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);
         adapter = new AlarmAdapter(this.getActivity(), alarmlist);
@@ -355,7 +364,42 @@ public class HomeFragment extends Fragment {
 //                //  current settings of the alarm we are editing
 //            }
 //        });
+        //Test, borrow edit alarm button TODO:Think of other solution
+        edit_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                DateFormat df = new SimpleDateFormat("h:mm a");
+                String date = df.format(Calendar.getInstance().getTime());
+                HomeViewModel myObj = new HomeViewModel();
+//                if (myObj.getSnooze_flag()==true){
+//                    int snooze_limit_update = myObj.getSnooze_limit_update();
+//                    System.out.println("!!!!!!Here!!!!!");
+//                    System.out.println(snooze_limit_update);
+//                    Handler handler = new Handler();
+//                    handler.postDelayed(new Runnable() {
+//                        public void run() {
+//                            // Actions to do after snooze_duration_int
+//                            setContentView(R.layout.activity_ring);
+//                            r.play();
+//                        }
+//                    }, snooze_duration_int*1000);
+//                }else{
+                    for(int i = 0; i < alarmlist.size(); i++){
 
+                        String curr = "";
+                        curr += alarmlist.get(i).getAlarmTime();
+                        curr += " ";
+                        curr += alarmlist.get(i).getAlarmAmPm();
+                        if (date.equals(curr)){
+                            Intent intent1 = new Intent(getActivity(), RingActivity.class);
+                            intent1.putExtra("snooze_limit",String.valueOf(alarmlist.get(i).getAlarmSnoozeFrequency()));
+                            intent1.putExtra("snooze_duration",String.valueOf(alarmlist.get(i).getAlarmSnoozeInterval()));
+                            startActivity(intent1);
+                        }
+                    }
+                }
+//            }
+        });
         //Add alarm
         add_alarm_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -487,7 +531,6 @@ public class HomeFragment extends Fragment {
                     // replace old alarm with edited alarm settings
                     alarmlist.set(edit_position, new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
                 }
-
                 updateListView();
 
                 if (alarm_setting_header_value == "Add Alarm") {
@@ -495,7 +538,6 @@ public class HomeFragment extends Fragment {
                 } else {
                     Toast.makeText(getContext(), "Alarm Edited", Toast.LENGTH_SHORT).show();
                 }
-
                 resetToDefaultSettings(binding);
             }
         });
@@ -687,8 +729,10 @@ public class HomeFragment extends Fragment {
 //        final TextView textView = binding.textHome;
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+
         return root;
     }
+
 
     @Override
     public void onDestroyView() {
