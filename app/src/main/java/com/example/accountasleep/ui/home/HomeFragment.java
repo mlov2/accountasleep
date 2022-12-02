@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.accountasleep.R;
 import com.example.accountasleep.RingActivity;
@@ -38,19 +39,15 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     private AlarmAdapter adapter;
-    private ArrayList<Alarm> alarmlist;
+    //private ArrayList<Alarm> alarmlist;
     private ListView lv;
-
-    public ArrayList<Alarm> getAlarmList(){
-        return alarmlist;
-    }
 
     private String alarm_setting_header_value = "";
     private int snooze_duration_input = -1;
     private int snooze_limit_input = -1;
 
     // variables for saving an alarm
-    ArrayList<ArrayList<Object>> alarms_raw = new ArrayList<>();
+    //ArrayList<ArrayList<Object>> alarms_raw = new ArrayList<>();
     private String save_alarm_label = "";
     private String save_alarm_time = "";
     private String save_alarm_time_of_day = "AM";
@@ -132,7 +129,7 @@ public class HomeFragment extends Fragment {
 
     private void populateHardcodedAlarms(String alarm_label, String alarm_time, String alarm_time_of_day,
                                          Boolean[] alarm_repeat, boolean send_a_msg, boolean snooze,
-                                         int snooze_duration, int snooze_limit) {
+                                         int snooze_duration, int snooze_limit, HomeViewModel homeViewModel) {
         ArrayList<Object> alarm_raw = new ArrayList<>();
         alarm_raw.add(alarm_label);
         alarm_raw.add(alarm_time);
@@ -142,10 +139,13 @@ public class HomeFragment extends Fragment {
         alarm_raw.add(snooze);
         alarm_raw.add(snooze_duration);
         alarm_raw.add(snooze_limit);
-        alarms_raw.add(alarm_raw);
+        //alarms_raw.add(alarm_raw);
+        ArrayList<ArrayList<Object>> curr_alarms_raw = homeViewModel.getAlarms_raw();
+        curr_alarms_raw.add(alarm_raw);
+        homeViewModel.setAlarms_raw(curr_alarms_raw);
     }
 
-    private void editAlarm(FragmentHomeBinding binding) {
+    private void editAlarm(FragmentHomeBinding binding, HomeViewModel homeViewModel) {
         TextView alarm_setting_header_label = binding.alarmSettingHeaderLabel;
         EditText alarm_label = binding.alarmLabel;
         TimePicker alarm_time = binding.fragmentCreatealarmTimePicker;
@@ -162,7 +162,8 @@ public class HomeFragment extends Fragment {
         alarm_setting_header_label.setText(alarm_setting_header_value);
 
         // get all the settings for the alarm that was clicked
-        ArrayList<Object> curr_alarm = alarms_raw.get(edit_position);
+        //ArrayList<Object> curr_alarm = alarms_raw.get(edit_position);
+        ArrayList<Object> curr_alarm = homeViewModel.getAlarms_raw().get(edit_position);
         String alarm_label_setting = (String) curr_alarm.get(0);
         String alarm_time_setting = (String) curr_alarm.get(1);
         String alarm_time_of_day_setting = (String) curr_alarm.get(2);
@@ -250,8 +251,8 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        HomeViewModel homeViewModel =
-//                new ViewModelProvider(this).get(HomeViewModel.class);
+        HomeViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -291,17 +292,30 @@ public class HomeFragment extends Fragment {
         // - to create a custom adapter: https://www.geeksforgeeks.org/custom-arrayadapter-with-listview-in-android/
         lv = (ListView) root.findViewById(R.id.alarm_list_view);
 
-        alarmlist = new ArrayList<>();
+        //alarmlist = new ArrayList<>();
         // hardcoded alarms
-        populateHardcodedAlarms("CS 465 lecture", "8:00", "AM", new Boolean[]{false, true, false, true, false, false, false}, true, true, 10, 3);
-        populateHardcodedAlarms("CS 465 studio", "8:00", "AM", new Boolean[]{false, false, false, false, false, true, false}, true, true, 8, 5);
-        populateHardcodedAlarms("Go to bed", "12:00", "AM", new Boolean[]{true, true, true, true, true, true, true}, false, false, -1, -1);
-        alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", true, 10, 3, true));
-        alarmlist.add(new Alarm("8:00", "AM", "F", "CS 465 studio", true, 8, 5, false));
-        alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", false, -1, -1, true));
-//        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
+        //populateHardcodedAlarms("CS 465 lecture", "8:00", "AM", new Boolean[]{false, true, false, true, false, false, false}, true, true, 10, 3);
+        //populateHardcodedAlarms("CS 465 studio", "8:00", "AM", new Boolean[]{false, false, false, false, false, true, false}, true, true, 8, 5);
+        //populateHardcodedAlarms("Go to bed", "12:00", "AM", new Boolean[]{true, true, true, true, true, true, true}, false, false, -1, -1);
+        //alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", true, 10, 3, true));
+        //alarmlist.add(new Alarm("8:00", "AM", "F", "CS 465 studio", true, 8, 5, false));
+        //alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", false, -1, -1, true));
+
+        ArrayList<Alarm> curr_alarmlist = homeViewModel.getAlarmlist();
+        if (curr_alarmlist.size() == 0) {
+            // hardcoded alarms
+            populateHardcodedAlarms("CS 465 lecture", "8:00", "AM", new Boolean[]{false, true, false, true, false, false, false}, true, true, 10, 3, homeViewModel);
+            populateHardcodedAlarms("CS 465 studio", "8:00", "AM", new Boolean[]{false, false, false, false, false, true, false}, true, true, 8, 5, homeViewModel);
+            populateHardcodedAlarms("Go to bed", "12:00", "AM", new Boolean[]{true, true, true, true, true, true, true}, false, false, -1, -1, homeViewModel);
+            curr_alarmlist.add(new Alarm("8:00", "AM", "MW", "CS 465 lecture", true, 10, 3, true));
+            curr_alarmlist.add(new Alarm("8:00", "AM", "F", "CS 465 studio", true, 8, 5, false));
+            curr_alarmlist.add(new Alarm("12:00", "AM", "SMTWThFS", "Go to bed", false, -1, -1, true));
+        }
+
+        //        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
 //        CustomAdapter adapter = new CustomAdapter(mobileArray, mobileArray, mobileArray, mobileArray, mobileArray);
-        adapter = new AlarmAdapter(this.getActivity(), alarmlist);
+        //adapter = new AlarmAdapter(this.getActivity(), alarmlist);
+        adapter = new AlarmAdapter(this.getActivity(), curr_alarmlist);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -316,7 +330,7 @@ public class HomeFragment extends Fragment {
                 // show alarm setting page
                 alarm_setting_page.setVisibility(View.VISIBLE);
 
-                editAlarm(binding);
+                editAlarm(binding, homeViewModel);
             }
         });
 
@@ -384,6 +398,7 @@ public class HomeFragment extends Fragment {
 //                        }
 //                    }, snooze_duration_int*1000);
 //                }else{
+                    ArrayList<Alarm> alarmlist = homeViewModel.getAlarmlist();
                     for(int i = 0; i < alarmlist.size(); i++){
 
                         String curr = "";
@@ -492,9 +507,15 @@ public class HomeFragment extends Fragment {
 
                 if (alarm_setting_header_value == "Add Alarm") {
                     // add new alarm
-                    alarms_raw.add(alarm_raw);
+                    //alarms_raw.add(alarm_raw);
+                    ArrayList<ArrayList<Object>> curr_alarms_raw = homeViewModel.getAlarms_raw();
+                    curr_alarms_raw.add(alarm_raw);
+                    homeViewModel.setAlarms_raw(curr_alarms_raw);
                 } else {
-                    alarms_raw.set(edit_position, alarm_raw);
+                    //alarms_raw.set(edit_position, alarm_raw);
+                    ArrayList<ArrayList<Object>> curr_alarms_raw = homeViewModel.getAlarms_raw();
+                    curr_alarms_raw.set(edit_position, alarm_raw);
+                    homeViewModel.setAlarms_raw(curr_alarms_raw);
                 }
 
                 // update alarm list page to include the new/edited alarm
@@ -526,10 +547,16 @@ public class HomeFragment extends Fragment {
 
                 if (alarm_setting_header_value == "Add Alarm") {
                     // add new alarm
-                    alarmlist.add(new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
+                    //alarmlist.add(new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
+                    ArrayList<Alarm> curr_alarmlist = homeViewModel.getAlarmlist();
+                    curr_alarmlist.add(new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
+                    homeViewModel.setAlarmlist(curr_alarmlist);
                 } else {
                     // replace old alarm with edited alarm settings
-                    alarmlist.set(edit_position, new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
+                    //alarmlist.set(edit_position, new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
+                    ArrayList<Alarm> curr_alarmlist = homeViewModel.getAlarmlist();
+                    curr_alarmlist.set(edit_position, new Alarm(alarm_time, alarm_time_of_day, alarm_repeat_str, alarm_label, send_msg, snooze_duration, snooze_limit, true));
+                    homeViewModel.setAlarmlist(curr_alarmlist);
                 }
                 updateListView();
 
@@ -555,8 +582,15 @@ public class HomeFragment extends Fragment {
 
                 // remove alarm from alarm list if editing an alarm
                 if (alarm_setting_header_value == "Edit Alarm") {
-                    alarmlist.remove(edit_position);
-                    alarms_raw.remove(edit_position);
+                    //alarmlist.remove(edit_position);
+                    ArrayList<Alarm> curr_alarmlist = homeViewModel.getAlarmlist();
+                    curr_alarmlist.remove(edit_position);
+                    homeViewModel.setAlarmlist(curr_alarmlist);
+
+                    //alarms_raw.remove(edit_position);
+                    ArrayList<ArrayList<Object>> curr_alarms_raw = homeViewModel.getAlarms_raw();
+                    curr_alarms_raw.remove(edit_position);
+                    homeViewModel.setAlarms_raw(curr_alarms_raw);
 
                     updateListView();
                 }

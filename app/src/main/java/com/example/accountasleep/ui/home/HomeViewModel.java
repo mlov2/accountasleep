@@ -4,11 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
     private int snooze_limit_update;
     private boolean snooze_flag = false;
+
+    private ArrayList<ArrayList<Object>> alarms_raw = new ArrayList<>();
+    private ArrayList<Alarm> alarmlist = new ArrayList<>();
+
+    public HomeViewModel() {
+        mText = new MutableLiveData<>();
+        mText.setValue("This is home fragment");
+    }
+
+    public LiveData<String> getText() {
+        return mText;
+    }
 
     public boolean getSnooze_flag() {
         return snooze_flag;
@@ -26,12 +40,19 @@ public class HomeViewModel extends ViewModel {
         this.snooze_limit_update = snooze_limit_update;
     }
 
-    public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+    public ArrayList<ArrayList<Object>> getAlarms_raw() {
+        return alarms_raw;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void setAlarms_raw(ArrayList<ArrayList<Object>> alarms_raw) {
+        this.alarms_raw = alarms_raw;
+    }
+
+    public ArrayList<Alarm> getAlarmlist(){
+        return alarmlist;
+    }
+
+    public void setAlarmlist(ArrayList<Alarm> alarmlist) {
+        this.alarmlist = alarmlist;
     }
 }
