@@ -59,12 +59,12 @@
                 android:layout_marginTop="10dp" />
 
             <Button
-                android:id="@+id/add_alarm_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00FFFFFF"
                 android:textColor="#8BC34A"
                 android:layout_weight="1"
+                android:visibility="invisible"
                 android:text="Add" />
         </LinearLayout>
 
@@ -81,13 +81,32 @@
             android:orientation="vertical"
             android:layout_marginBottom="60dp">
 
-            <ListView
-                android:id="@+id/alarm_list_view"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true">
-            </ListView>
+                android:layout_height="match_parent">
 
+                <!-- ref for whitespace at end of list: https://itecnote.com/tecnote/android-how-to-add-blank-space-to-the-end-of-a-listview/-->
+                <ListView
+                    android:id="@+id/alarm_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="80dp"
+                    android:clipToPadding="false"
+                    android:clickable="true">
+                </ListView>
+
+                <!-- ref: https://m2.material.io/components/buttons-floating-action-button/android#regular-fabs -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/add_alarm_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_24"
+                    android:layout_gravity="bottom|right"
+                    android:contentDescription="add"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="20dp"
+                    />
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </LinearLayout>
     </LinearLayout>
 
