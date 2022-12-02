@@ -1,8 +1,12 @@
 package com.example.accountasleep.ui.dashboard;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,6 +29,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -35,6 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import android.telephony.SmsManager;
 
 public class DashboardFragment extends Fragment {
 
@@ -63,6 +70,7 @@ public class DashboardFragment extends Fragment {
         }
     });
 
+    @SuppressLint("IntentReset")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -113,10 +121,32 @@ public class DashboardFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                someActivityResultLauncher.launch(intent);
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                someActivityResultLauncher.launch(intent);
+
+                if (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.SEND_SMS)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                            Manifest.permission.SEND_SMS)) {
+                    } else {
+                        ActivityCompat.requestPermissions(getActivity(),
+                                new String[]{Manifest.permission.SEND_SMS},
+                                0);
+                    }
+                }
+
+                try{
+                    SmsManager smgr = SmsManager.getDefault();
+                    smgr.sendMultimediaMessage(getContext(), Uri.parse("android.resource://com.example.accountasleep/" + R.drawable.sample_img_2), null, null, null);
+                    smgr.sendTextMessage("+11234567890",null,"Test: Accountasleep!",null,null);
+                    Toast.makeText(getActivity(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity(), "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
