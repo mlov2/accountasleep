@@ -23,10 +23,10 @@
             android:id="@+id/alarm_am_pm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:text=" AM"
             android:textColor="@color/black"
-            android:textSize="45dp" />
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/alarm_days"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_alignParentRight="true"
-                android:paddingRight="10dp"
+                android:paddingRight="20dp"
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 android:focusable="false"/>
@@ -83,7 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
-            android:paddingTop="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:scaleY="1"
             android:scaleX="1"
             android:src="@drawable/ic_send_msg"/>
