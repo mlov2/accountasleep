@@ -309,8 +309,8 @@ public class HomeFragment extends Fragment {
             populateHardcodedAlarms("CS 465 studio", "8:00", "AM", new Boolean[]{false, false, false, false, false, true, false}, true, true, 8, 5, homeViewModel);
             populateHardcodedAlarms("Go to bed", "12:00", "AM", new Boolean[]{true, true, true, true, true, true, true}, false, false, -1, -1, homeViewModel);
             curr_alarmlist.add(new Alarm("8:00", "AM", "M W", "CS 465 lecture", true, 10, 3, true));
-            curr_alarmlist.add(new Alarm("8:00", "AM", "F", "CS 465 studio", true, 8, 5, false));
-            curr_alarmlist.add(new Alarm("12:00", "AM", "S M T W Th F S", "Go to bed", false, -1, -1, true));
+            curr_alarmlist.add(new Alarm("8:00", "AM", "Every Friday", "CS 465 studio", true, 8, 5, false));
+            curr_alarmlist.add(new Alarm("12:00", "AM", "Every day", "Go to bed", false, -1, -1, true));
         }
 
         //        ArrayAdapter adapter=new ArrayAdapter(this.getActivity(), android.R.layout.simple_list_item_1, mobileArray);
@@ -533,6 +533,20 @@ public class HomeFragment extends Fragment {
                     alarm_repeat_str = "Every weekday";
                 } else if (alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && alarm_repeat[6]) {
                     alarm_repeat_str = "Every weekend";
+                } else if (alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && !alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Sunday";
+                } else if (!alarm_repeat[0] && alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && !alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Monday";
+                } else if (!alarm_repeat[0] && !alarm_repeat[1] && alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && !alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Tuesday";
+                } else if (!alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && !alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Wednesday";
+                } else if (!alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && alarm_repeat[4] && !alarm_repeat[5] && !alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Thursday";
+                } else if (!alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && alarm_repeat[5] && !alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Friday";
+                } else if (!alarm_repeat[0] && !alarm_repeat[1] && !alarm_repeat[2] && !alarm_repeat[3] && !alarm_repeat[4] && !alarm_repeat[5] && alarm_repeat[6]) {
+                    alarm_repeat_str = "Every Saturday";
                 } else {
                     if (alarm_repeat[0]) alarm_repeat_str += "S ";
                     if (alarm_repeat[1]) alarm_repeat_str += "M ";
