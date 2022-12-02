@@ -3,32 +3,24 @@ package com.example.accountasleep.ui.dashboard;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -36,18 +28,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.accountasleep.R;
 import com.example.accountasleep.databinding.FragmentDashboardBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import android.telephony.SmsManager;
 
 public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
-    ImageButton btn;
-    ImageButton cameraBtn;
+    FloatingActionButton cameraBtn;
+    FloatingActionButton albumBtn;
     GridView gridView;
     ActivityResultLauncher<Intent> someActivityResultLauncher;
     ActivityResultLauncher<Intent> cameraActivityResultLauncher;
@@ -79,6 +68,37 @@ public class DashboardFragment extends Fragment {
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        // Floating Button
+
+        FloatingActionButton fab = root.findViewById(R.id.floatingActionButton);
+        albumBtn = root.findViewById(R.id.ActionButtonImg);
+        cameraBtn = root.findViewById(R.id.ActionButtonCam);
+        fab.setOnClickListener(new View.OnClickListener() {
+
+            boolean isFABOpen = false;
+
+            @Override
+            public void onClick(View view) {
+                if(!isFABOpen){
+                    showFABMenu();
+                }else{
+                    closeFABMenu();
+                }
+            }
+
+            private void showFABMenu(){
+                isFABOpen=true;
+                albumBtn.animate().translationY(-getResources().getDimension(R.dimen.standard_70));
+                cameraBtn.animate().translationY(-getResources().getDimension(R.dimen.standard_140));
+            }
+
+            private void closeFABMenu(){
+                isFABOpen=false;
+                albumBtn.animate().translationY(0);
+                cameraBtn.animate().translationY(0);
+            }
+        });
 
         // Set Gridview
         gridView = (GridView) root.findViewById(R.id.gridview);
@@ -116,15 +136,14 @@ public class DashboardFragment extends Fragment {
                     }
                 });
 
-        btn = root.findViewById(R.id.ImageButton02);
-
-        btn.setOnClickListener(new View.OnClickListener() {
+//        btn = root.findViewById(R.id.ImageButton02);
+        albumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                someActivityResultLauncher.launch(intent);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                someActivityResultLauncher.launch(intent);
 
                 if (ContextCompat.checkSelfPermission(getContext(),
                         Manifest.permission.SEND_SMS)
@@ -137,16 +156,16 @@ public class DashboardFragment extends Fragment {
                                 0);
                     }
                 }
-
-                try{
-                    SmsManager smgr = SmsManager.getDefault();
-//                    smgr.sendMultimediaMessage(getContext(), Uri.parse("android.resource://com.example.accountasleep/" + R.drawable.sample_img_2), null, null, null);
-                    smgr.sendTextMessage("+11234567890",null,"Test: Accountasleep!",null,null);
-                    Toast.makeText(getActivity(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e){
-                    Toast.makeText(getActivity(), "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
-                }
+//
+//                try{
+//                    SmsManager smgr = SmsManager.getDefault();
+//                    // smgr.sendMultimediaMessage(getContext(), Uri.parse("android.resource://com.example.accountasleep/" + R.drawable.sample_img_2), null, null, null);
+//                    smgr.sendTextMessage("+11234567891",null,"Test: Accountasleep!",null,null);
+//                    Toast.makeText(getActivity(), "SMS Sent Successfully!", Toast.LENGTH_SHORT).show();
+//                }
+//                catch (Exception e){
+//                    Toast.makeText(getActivity(), "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });
@@ -179,8 +198,8 @@ public class DashboardFragment extends Fragment {
                     }
                 });
 
-        cameraBtn = root.findViewById(R.id.openCamera);
-        cameraBtn.setOnClickListener(new View.OnClickListener() {
+//        cameraBtn = root.findViewById(R.id.openCamera);
+        this.cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent open_camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
