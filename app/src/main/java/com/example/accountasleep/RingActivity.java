@@ -106,8 +106,8 @@ public class RingActivity extends Activity {
                         timerText.setText("done!");
                         if (findViewById(R.id.linlay_quiz_prompt).getVisibility() == View.VISIBLE) {
                             findViewById(R.id.linlay_quiz_prompt).setVisibility(View.GONE);
+                            // Send SMS message
                             SmsManager smgr = SmsManager.getDefault();
-//                            smgr.sendTextMessage("+11234567890",null,"GET UP: Accountasleep!",null,null);
                             smgr.sendTextMessage("+12175551212",null, "Uh oh! I slept past my alarm today! I wasn't able to stop this photo from sending to you.",null,null);
                             smgr.sendTextMessage("+12175551212",null, "[image.jpg]",null,null);
                             findViewById(R.id.linlay_quiz_fail).setVisibility(View.VISIBLE);
