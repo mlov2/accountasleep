@@ -155,13 +155,14 @@ public class NotificationsFragment extends Fragment {
         confirmContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                enteredContactName.setText("");
                 enteredPhoneNumber.setText("");
                 notificationsViewModel.setContacts(initialContacts);
                 updateContacts();
 
                 binding.rellayManageContactsPage.setVisibility(View.GONE);
                 binding.linlayAccountPage.setVisibility(View.VISIBLE);
-                binding.btnStartQuiz.setVisibility(View.VISIBLE);
+//                binding.btnStartQuiz.setVisibility(View.VISIBLE);
             }
         });
 
@@ -169,7 +170,7 @@ public class NotificationsFragment extends Fragment {
         cancelContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enteredPhoneNumber.setText("");
+                enteredContactName.setText("");
                 enteredPhoneNumber.setText("");
                 initialContacts.clear();
                 for (String name : notificationsViewModel.getContactNames()) {
@@ -181,7 +182,7 @@ public class NotificationsFragment extends Fragment {
 
                 binding.rellayManageContactsPage.setVisibility(View.GONE);
                 binding.linlayAccountPage.setVisibility(View.VISIBLE);
-                binding.btnStartQuiz.setVisibility(View.VISIBLE);
+//                binding.btnStartQuiz.setVisibility(View.VISIBLE);
             }
         });
 
@@ -220,7 +221,7 @@ public class NotificationsFragment extends Fragment {
                     notificationsViewModel.setMessage(binding.edittextMessage.getText().toString());
                     binding.rellayEditMessage.setVisibility(View.GONE);
                     binding.linlayAccountPage.setVisibility(View.VISIBLE);
-                    binding.btnStartQuiz.setVisibility(View.VISIBLE);
+//                    binding.btnStartQuiz.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -231,7 +232,7 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View v) {
                 binding.rellayEditMessage.setVisibility(View.GONE);
                 binding.linlayAccountPage.setVisibility(View.VISIBLE);
-                binding.btnStartQuiz.setVisibility(View.VISIBLE);
+//                binding.btnStartQuiz.setVisibility(View.VISIBLE);
             }
         });
 
