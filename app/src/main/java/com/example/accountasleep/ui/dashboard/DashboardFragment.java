@@ -140,7 +140,7 @@ public class DashboardFragment extends Fragment {
 
                 try{
                     SmsManager smgr = SmsManager.getDefault();
-                    smgr.sendMultimediaMessage(getContext(), Uri.parse("android.resource://com.example.accountasleep/" + R.drawable.sample_img_2), null, null, null);
+//                    smgr.sendMultimediaMessage(getContext(), Uri.parse("android.resource://com.example.accountasleep/" + R.drawable.sample_img_2), null, null, null);
                     smgr.sendTextMessage("+11234567890",null,"Test: Accountasleep!",null,null);
                     Toast.makeText(getActivity(), "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
                 }
