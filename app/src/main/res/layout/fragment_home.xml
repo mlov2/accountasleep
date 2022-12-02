@@ -226,14 +226,15 @@
                                 android:id="@+id/repeat_button"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="left|center_vertical"
+                                android:layout_weight="1"
+                                android:gravity="right|center_vertical"
+                                android:layout_marginRight="20dp"
                                 android:backgroundTint="@color/material_dynamic_neutral100"
                                 android:drawableEnd="@drawable/ic_chevron_right"
                                 android:drawableTint="@color/material_dynamic_neutral40"
                                 android:text="@string/repeat"
                                 android:textAllCaps="false"
-                                android:paddingLeft="180dp"
-                                android:textSize="17sp"
+                                android:textSize="15sp"
                                 style="?android:attr/borderlessButtonStyle"
                                 android:textColor="@color/material_dynamic_neutral40" />
 
@@ -247,16 +248,31 @@
                         android:layout_weight="0.6"
                         android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:text="SEND A MESSAGE"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:paddingLeft="15dp"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="15dp"
+                            android:paddingLeft="10dp"
+                            android:src="@drawable/ic_send_msg"/>
+
                         <Switch
                             android:id="@+id/send_message_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="15dp"
                             android:layout_weight="1"
-                            android:gravity="left"
-                            android:text="   SEND A MESSAGE"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
+                            android:gravity="right"
+                            android:paddingRight="20dp"
                             android:checked="true"/>
 
                     </LinearLayout>
@@ -267,24 +283,48 @@
                         android:layout_weight="0.6"
                         android:orientation="vertical">
 
-                        <Switch
-                            android:id="@+id/snooze_switch"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            android:switchPadding="30dp"
-                            android:text="   SNOOZE"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="SNOOZE"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:paddingLeft="15dp"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5dp"
+                                android:paddingLeft="10dp"
+                                android:src="@drawable/ic_snooze_icon"/>
+
+                            <Switch
+                                android:id="@+id/snooze_switch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:paddingRight="20dp"
+                                android:checked="false"/>
+
+                        </LinearLayout>
+
                         <androidx.cardview.widget.CardView
                             android:id="@+id/snooze_card"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="5dp"
                             app:cardElevation="10dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginHorizontal="10dp"
                             android:visibility="invisible">
 
@@ -307,14 +347,15 @@
                                         android:id="@+id/duration_button"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:gravity="left|center_vertical"
+                                        android:layout_weight="1"
+                                        android:gravity="right|center_vertical"
+                                        android:layout_marginRight="10dp"
                                         android:backgroundTint="@color/material_dynamic_neutral100"
                                         android:drawableEnd="@drawable/ic_chevron_right"
                                         android:drawableTint="@color/material_dynamic_neutral40"
                                         android:text="@string/snooze_duration"
                                         android:textAllCaps="false"
                                         android:textSize="10sp"
-                                        android:paddingLeft="180dp"
                                         style="?android:attr/borderlessButtonStyle"
                                         android:textColor="@color/material_dynamic_neutral40" />
                                 </LinearLayout>
@@ -358,7 +399,7 @@
                         android:background="#0DFFFFFF"
                         android:textSize="20sp"
                         android:text="Delete Alarm"
-                        android:textColor="#8BC34A" />
+                        android:textColor="#FF0000" />
 
                 </LinearLayout>
 
