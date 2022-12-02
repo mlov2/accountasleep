@@ -67,11 +67,17 @@ public class AlarmAdapter extends ArrayAdapter<Alarm> {
 
             TextView snooze_frequency = (TextView) listItem.findViewById(R.id.alarm_snooze_frequency);
             snooze_frequency.setText(Integer.toString(currentAlarm.getAlarmSnoozeFrequency()));
+        } else {
+            LinearLayout snooze_linear_layout = (LinearLayout) listItem.findViewById(R.id.snooze_layout);
+            snooze_linear_layout.setVisibility(View.GONE);
         }
 
         if (currentAlarm.getAlarmEnabled()) {
             Switch alarm_enable = (Switch) listItem.findViewById(R.id.alarm_enable);
             alarm_enable.setChecked(true);
+        } else {
+            Switch alarm_enable = (Switch) listItem.findViewById(R.id.alarm_enable);
+            alarm_enable.setChecked(false);
         }
 
         return listItem;
