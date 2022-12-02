@@ -8,6 +8,7 @@ import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -84,7 +85,8 @@ public class RingActivity extends Activity {
                 findViewById(R.id.rellay_ring_page).setVisibility(View.GONE);
                 findViewById(R.id.linlay_quiz_screen).setVisibility(View.VISIBLE);
                 TextView timerText = findViewById(R.id.text_quiz_time);
-                new CountDownTimer(90000, 1000) { // 30000, 1000 is 30 seconds
+                // new CountDownTimer(90000, 1000) { // 30000, 1000 is 30 seconds
+                new CountDownTimer(10000, 1000) { // 30000, 1000 is 30 seconds
                     public void onTick(long millisUntilFinished) {
                         long minutes = (millisUntilFinished / 1000) / 60;
                         long seconds = (millisUntilFinished / 1000) % 60;
@@ -104,10 +106,17 @@ public class RingActivity extends Activity {
                         timerText.setText("done!");
                         if (findViewById(R.id.linlay_quiz_prompt).getVisibility() == View.VISIBLE) {
                             findViewById(R.id.linlay_quiz_prompt).setVisibility(View.GONE);
+                            SmsManager smgr = SmsManager.getDefault();
+//                            smgr.sendTextMessage("+11234567890",null,"GET UP: Accountasleep!",null,null);
+                            smgr.sendTextMessage("+12175551212",null, "Uh oh! I slept past my alarm today! I wasn't able to stop this photo from sending to you.",null,null);
+                            smgr.sendTextMessage("+12175551212",null, "[image.jpg]",null,null);
                             findViewById(R.id.linlay_quiz_fail).setVisibility(View.VISIBLE);
                         }
                     }
+
+
                 }.start();
+
             }
         });
 
