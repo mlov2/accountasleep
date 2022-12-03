@@ -85,8 +85,8 @@ public class RingActivity extends Activity {
                 findViewById(R.id.rellay_ring_page).setVisibility(View.GONE);
                 findViewById(R.id.linlay_quiz_screen).setVisibility(View.VISIBLE);
                 TextView timerText = findViewById(R.id.text_quiz_time);
-                // new CountDownTimer(90000, 1000) { // 30000, 1000 is 30 seconds
-                new CountDownTimer(10000, 1000) { // 30000, 1000 is 30 seconds
+                new CountDownTimer(90000, 1000) { // 30000, 1000 is 30 seconds
+                //new CountDownTimer(10000, 1000) { // 30000, 1000 is 30 seconds
                     public void onTick(long millisUntilFinished) {
                         long minutes = (millisUntilFinished / 1000) / 60;
                         long seconds = (millisUntilFinished / 1000) % 60;
